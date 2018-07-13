@@ -59,7 +59,7 @@ class Map extends React.Component {
         {...viewport}
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        mapStyle="mapbox://styles/nshki/cjjd0nqj47j8k2snn2bgrtqnv"
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
       >
         {this._renderMe()}
       </MapGL>
