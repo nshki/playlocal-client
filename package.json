@@ -7,7 +7,10 @@
     "react-dom": "^16.4.1",
     "react-geolocated": "^2.4.0",
     "react-map-gl": "^3.3.0",
+    "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-devtools": "^3.4.1",
     "styled-components": "^3.3.3"
   },
   "scripts": {
