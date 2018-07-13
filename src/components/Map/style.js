@@ -13,13 +13,17 @@ const pulse = keyframes`
 `;
 
 export const Signal = styled.div`
-  width: 20px;
-  height: 20px;
+  width: 23px;
+  height: 23px;
   position: relative;
 
   &:after {
     content: '';
     background-color: #ff8a00;
+    background-image: url(${props => props.imageURL});
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100%;
     display: block;

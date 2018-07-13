@@ -48,7 +48,7 @@ class Map extends React.Component {
           longitude={this.state.viewport.longitude}
           latitude={this.state.viewport.latitude}
         >
-          <Signal />
+          <Signal imageURL="https://cdn.discordapp.com/avatars/87933776788754432/e413c45c7774da835a046377a295eec3" />
         </Marker>
       </MapGL>
     );
