@@ -10,4 +10,8 @@ injectGlobal`
     outline: 0;
     appearance: none;
   }
+
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
 `;

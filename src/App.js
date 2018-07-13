@@ -1,10 +1,14 @@
 import React from 'react';
+import MenuBar from './components/MenuBar';
 import Map from './components/Map';
 
 class App extends React.Component {
   render() {
     return (
-      <Map />
+      <React.Fragment>
+        <MenuBar />
+        <Map />
+      </React.Fragment>
     );
   }
 }
