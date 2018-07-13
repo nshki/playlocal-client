@@ -27,8 +27,8 @@ class Map extends React.Component {
     this.setState({
       viewport: {
         ...this.state.viewport,
-        width: this.props.width || window.innerWidth,
-        height: this.props.height || window.innerHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
       },
     });
   };
@@ -38,13 +38,11 @@ class Map extends React.Component {
   };
 
   _renderMe = () => {
-    const { coords } = this.props;
-
     return (
-      coords !== null &&
+      this.props.coords !== null &&
       <Marker
-        longitude={coords.longitude}
-        latitude={coords.latitude}
+        longitude={this.props.coords.longitude}
+        latitude={this.props.coords.latitude}
       >
         <Signal me />
       </Marker>
@@ -52,11 +50,9 @@ class Map extends React.Component {
   };
 
   render() {
-    const { viewport } = this.state;
-
     return (
       <MapGL
-        {...viewport}
+        {...this.state.viewport}
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
