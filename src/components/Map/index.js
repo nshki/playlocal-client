@@ -1,5 +1,6 @@
 import React from 'react';
-import ReactMapGL from 'react-map-gl';
+import MapGL, { Marker } from 'react-map-gl';
+import { Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 class Map extends React.Component {
@@ -15,6 +16,10 @@ class Map extends React.Component {
 
   componentDidMount() {
     window.addEventListener('resize', this._resize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._resize);
   }
 
   _resize = () => {
@@ -33,12 +38,19 @@ class Map extends React.Component {
 
   render() {
     return (
-      <ReactMapGL
+      <MapGL
         {...this.state.viewport}
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle="mapbox://styles/nshki/cjjd0nqj47j8k2snn2bgrtqnv"
-      />
+      >
+        <Marker
+          longitude={this.state.viewport.longitude}
+          latitude={this.state.viewport.latitude}
+        >
+          <Signal />
+        </Marker>
+      </MapGL>
     );
   }
 }
