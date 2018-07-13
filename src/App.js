@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
+import Map from './components/Map';
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <div>
-      </div>
+      <Map />
     );
   }
 }
