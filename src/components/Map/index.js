@@ -1,5 +1,6 @@
 import React from 'react';
 import MapGL, { Marker } from 'react-map-gl';
+import { geolocated } from 'react-geolocated';
 import { Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -36,23 +37,39 @@ class Map extends React.Component {
     this.setState({ viewport });
   };
 
+  _renderMe = () => {
+    const { coords } = this.props;
+
+    return (
+      coords !== null &&
+      <Marker
+        longitude={coords.longitude}
+        latitude={coords.latitude}
+      >
+        <Signal me />
+      </Marker>
+    );
+  };
+
   render() {
+    const { viewport } = this.state;
+
     return (
       <MapGL
-        {...this.state.viewport}
+        {...viewport}
         onViewportChange={this._updateViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle="mapbox://styles/nshki/cjjd0nqj47j8k2snn2bgrtqnv"
       >
-        <Marker
-          longitude={this.state.viewport.longitude}
-          latitude={this.state.viewport.latitude}
-        >
-          <Signal imageURL="https://cdn.discordapp.com/avatars/87933776788754432/e413c45c7774da835a046377a295eec3" />
-        </Marker>
+        {this._renderMe()}
       </MapGL>
     );
   }
 }
 
-export default Map;
+export default geolocated({
+  positionOptions: {
+    enableHighAccuracy: true,
+  },
+  watchPosition: true,
+})(Map);
