@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 const pulse = keyframes`
   from {
@@ -17,29 +17,36 @@ export const Signal = styled.div`
   height: 20px;
   position: relative;
 
-  &:before {
-    content: '';
-    background-color: rgba(0, 148, 255, 0.7);
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    animation: ${pulse} 1.5s ease-in-out infinite;
-  }
-
   &:after {
     content: '';
-    background-color: #0094ff;
+    background-color: #ff8a00;
     width: 100%;
     height: 100%;
     display: block;
     border: 3px solid #fff;
     border-radius: 100%;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: 2;
   }
+
+  ${props => props.me && css`
+    &:before {
+      content: '';
+      background-color: rgba(0, 148, 255, 0.7);
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: ${pulse} 1.5s ease-in-out infinite;
+    }
+
+    &:after {
+      background-color: #0094ff;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  `}
 `;
