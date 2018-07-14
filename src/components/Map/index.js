@@ -23,6 +23,16 @@ class Map extends React.Component {
     window.removeEventListener('resize', this._resize);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.coords !== null && prevProps.coords === null) {
+      this._updateViewport({
+        ...this.state.viewport,
+        latitude: this.props.coords.latitude,
+        longitude: this.props.coords.longitude,
+      });
+    }
+  }
+
   _resize = () => {
     this.setState({
       viewport: {
@@ -38,15 +48,18 @@ class Map extends React.Component {
   };
 
   _renderMe = () => {
-    return (
-      this.props.coords !== null &&
-      <Marker
-        longitude={this.props.coords.longitude}
-        latitude={this.props.coords.latitude}
-      >
-        <Signal me />
-      </Marker>
-    );
+    if (this.props.coords !== null) {
+      return (
+        <Marker
+          longitude={this.props.coords.longitude}
+          latitude={this.props.coords.latitude}
+        >
+          <Signal me />
+        </Marker>
+      );
+    }
+
+    return false;
   };
 
   render() {
