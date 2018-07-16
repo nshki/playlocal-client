@@ -1,13 +1,12 @@
 /**
  * Store the user's current location.
  *
- * @param {Object} { latitude: Float, longitude: Float }
+ * @param {Object} coords { latitude: Float, longitude: Float }
  * @returns {Object}
  */
-export const updateCurrentLocation = ({ latitude, longitude }) => {
+export const updateCurrentLocation = (coords) => {
   return {
     type: 'UPDATE_LOCATION',
-    latitude,
-    longitude,
+    coords,
   };
 };
