@@ -24,6 +24,18 @@ export const Logo = styled.h1`
   color: #fff;
 `;
 
+export const AvatarButton = styled.button`
+  background-color: #ff8a00;
+  background-image: url(${props => props.imageUrl});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 28px;
+  height: 28px;
+  border: 2px solid #fff;
+  border-radius: 100%;
+`;
+
 export const SignInButton = styled.button`
   background-color: transparent;
   cursor: pointer;
