@@ -8,6 +8,7 @@ import CurrentUserQuery from './shared/graphql/userQueries';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
+import SignInOverlay from './views/SignInOverlay';
 import registerServiceWorker from './registerServiceWorker';
 import './reset.css.js';
 
@@ -20,6 +21,7 @@ class App extends React.Component {
             <CurrentUserQuery>
               <MenuBar />
               <Route exact path="/" component={MapScreen} />
+              <SignInOverlay />
             </CurrentUserQuery>
           </Router>
         </ApolloProvider>
