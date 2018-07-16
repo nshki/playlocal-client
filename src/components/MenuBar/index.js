@@ -1,15 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { showSignInOverlay, showMenuOverlay } from '../../actions/overlays';
 import SignInIcon from '../SignInIcon';
 import { Container, Logo, AvatarButton, SignInButton } from './style';
 
 class MenuBar extends React.Component {
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, onSignInClick, onAvatarClick } = this.props;
     const action = currentUser.username ? (
-      <AvatarButton imageUrl={currentUser[`${currentUser.avatarPlatform}ImageUrl`]} />
+      <AvatarButton
+        imageUrl={currentUser[`${currentUser.avatarPlatform}ImageUrl`]}
+        onClick={onAvatarClick}
+      />
     ) : (
-      <SignInButton>
+      <SignInButton onClick={onSignInClick}>
         <SignInIcon />
       </SignInButton>
     );
@@ -28,7 +32,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onSignInClick: () => dispatch(showSignInOverlay(true)),
+    onAvatarClick: () => dispatch(showMenuOverlay(true)),
+  };
 };
 
 export default connect(

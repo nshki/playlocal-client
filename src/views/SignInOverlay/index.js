@@ -1,19 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { showSignInOverlay } from '../../actions/overlays';
 import Overlay from '../../components/Overlay';
 import IconButton from '../../components/IconButton';
 import { ButtonWrapper } from './style';
 
 class SignInOverlay extends React.Component {
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, visible, onOverlayClick } = this.props;
 
     if (currentUser.username) {
       return null;
     }
 
     return (
-      <Overlay visible={true}>
+      <Overlay onOverlayClick={onOverlayClick} visible={visible}>
         <ButtonWrapper>
           <IconButton type="twitter" tall>Sign in with Twitter</IconButton>
         </ButtonWrapper>
@@ -27,11 +28,16 @@ class SignInOverlay extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser };
+  return {
+    currentUser: state.currentUser,
+    visible: state.overlays.showSignInOverlay,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    onOverlayClick: () => dispatch(showSignInOverlay(false)),
+  };
 };
 
 export default connect(

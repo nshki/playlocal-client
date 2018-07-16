@@ -3,9 +3,9 @@ import { Container } from './style';
 
 class Overlay extends React.Component {
   render() {
-    const { visible, children } = this.props;
+    const { visible, onOverlayClick, children } = this.props;
     return (
-      <Container visible={visible}>
+      <Container visible={visible} onClick={onOverlayClick}>
         {children}
       </Container>
     );

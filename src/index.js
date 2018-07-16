@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
 import SignInOverlay from './views/SignInOverlay';
+import MenuOverlay from './views/MenuOverlay';
 import registerServiceWorker from './registerServiceWorker';
 import './reset.css.js';
 
@@ -22,6 +23,7 @@ class App extends React.Component {
               <MenuBar />
               <Route exact path="/" component={MapScreen} />
               <SignInOverlay />
+              <MenuOverlay />
             </CurrentUserQuery>
           </Router>
         </ApolloProvider>
