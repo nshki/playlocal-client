@@ -58,9 +58,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onUserLoad: (data) => {
-      dispatch(updateCurrentUser(data));
-    },
+    onUserLoad: (data) => dispatch(updateCurrentUser(data)),
   };
 };
 

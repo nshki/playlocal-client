@@ -53,7 +53,9 @@ export const IconWrapper = styled.div`
 `;
 
 export const Text = styled.div`
+  flex-grow: 1;
   font-weight: 700;
   font-size: 0.875rem;
+  text-align: left;
   color: #fff;
 `;

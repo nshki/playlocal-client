@@ -3,9 +3,19 @@ import { connect } from 'react-redux';
 import { showSignInOverlay } from '../../actions/overlays';
 import Overlay from '../../components/Overlay';
 import IconButton from '../../components/IconButton';
-import { ButtonWrapper } from './style';
+import { Container } from './style';
 
 class SignInOverlay extends React.Component {
+  onTwitterClick = (e) => {
+    e.stopPropagation();
+    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/twitter`;
+  };
+
+  onDiscordClick = (e) => {
+    e.stopPropagation();
+    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord`;
+  };
+
   render() {
     const { currentUser, visible, onOverlayClick } = this.props;
 
@@ -15,13 +25,14 @@ class SignInOverlay extends React.Component {
 
     return (
       <Overlay onOverlayClick={onOverlayClick} visible={visible}>
-        <ButtonWrapper>
-          <IconButton type="twitter" tall>Sign in with Twitter</IconButton>
-        </ButtonWrapper>
-
-        <ButtonWrapper>
-          <IconButton type="discord" tall>Sign in with Discord</IconButton>
-        </ButtonWrapper>
+        <Container>
+          <IconButton onClick={this.onTwitterClick} type="twitter" tall>
+            Sign in with Twitter
+          </IconButton>
+          <IconButton onClick={this.onDiscordClick} type="discord" tall>
+            Sign in with Discord
+          </IconButton>
+        </Container>
       </Overlay>
     );
   }

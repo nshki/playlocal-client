@@ -1,3 +1,5 @@
+import { removeFromStorage } from '../helpers/localStorage';
+
 const initialState = {
   username: null,
   avatarPlatform: null,
@@ -15,6 +17,8 @@ const initialState = {
 export default function currentUser(state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_CURRENT_USER':
+      if (!action.graphqlResult.currentUser) return state;
+
       const {
         username,
         avatarPlatform,
@@ -37,6 +41,9 @@ export default function currentUser(state = initialState, action) {
         signalLng: playSignal.lng,
         signalMessage: playSignal.message,
       };
+    case 'CLEAR_CURRENT_USER':
+      removeFromStorage('token');
+      return initialState;
     default:
       return state;
   }
