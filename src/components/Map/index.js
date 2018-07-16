@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MapGL, { Marker } from 'react-map-gl';
 import { geolocated } from 'react-geolocated';
+import { getAvatarForUser } from '../../helpers/users';
 import { Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -50,7 +51,6 @@ class Map extends React.Component {
 
   _renderMe = () => {
     const { coords, currentUser } = this.props;
-    const avatar = currentUser[`${currentUser.avatarPlatform}ImageUrl`];
 
     if (coords) {
       return (
@@ -58,7 +58,7 @@ class Map extends React.Component {
           longitude={this.props.coords.longitude}
           latitude={this.props.coords.latitude}
         >
-          <Signal me imageUrl={avatar} />
+          <Signal me imageUrl={getAvatarForUser(currentUser)} />
         </Marker>
       );
     }
