@@ -8,6 +8,7 @@ const authContext = (queryParams) => {
   if (!token && params.token) {
     token = params.token;
     setInStorage('token', token);
+    window.location.replace(process.env.REACT_APP_BASE_URL);
   }
 
   return {
