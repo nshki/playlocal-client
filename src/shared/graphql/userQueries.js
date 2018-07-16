@@ -29,11 +29,8 @@ export const CURRENT_USER_QUERY = gql`
 
 class CurrentUserQuery extends React.Component {
   render() {
-    const { onUserLoad } = this.props;
-
-    // Currently using React Router's location search prop, so this component
-    // must be passed as a Route component.
-    const context = authContext(this.props.location.search.replace('?', ''));
+    const { onUserLoad, children } = this.props;
+    const context = authContext(window.location.search.replace('?', ''));
 
     return (
       <Query query={CURRENT_USER_QUERY} context={context}>
@@ -48,7 +45,7 @@ class CurrentUserQuery extends React.Component {
           }
 
           onUserLoad(data);
-          return null;
+          return children;
         }}
       </Query>
     );

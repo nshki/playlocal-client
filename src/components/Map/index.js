@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import MapGL, { Marker } from 'react-map-gl';
 import { geolocated } from 'react-geolocated';
 import { Signal } from './style';
@@ -48,13 +49,16 @@ class Map extends React.Component {
   };
 
   _renderMe = () => {
-    if (this.props.coords !== null) {
+    const { coords, currentUser } = this.props;
+    const avatar = currentUser[`${currentUser.avatarPlatform}ImageUrl`];
+
+    if (coords) {
       return (
         <Marker
           longitude={this.props.coords.longitude}
           latitude={this.props.coords.latitude}
         >
-          <Signal me />
+          <Signal me imageUrl={avatar} />
         </Marker>
       );
     }
@@ -76,9 +80,22 @@ class Map extends React.Component {
   }
 }
 
-export default geolocated({
+const GeolocatedMap = geolocated({
   positionOptions: {
     enableHighAccuracy: true,
   },
   watchPosition: true,
 })(Map);
+
+const mapStateToProps = (state) => {
+  return { currentUser: state.currentUser };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GeolocatedMap);

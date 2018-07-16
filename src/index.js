@@ -17,11 +17,10 @@ class App extends React.Component {
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
           <Router>
-            <React.Fragment>
+            <CurrentUserQuery>
               <MenuBar />
-              <Route component={CurrentUserQuery} />
               <Route exact path="/" component={MapScreen} />
-            </React.Fragment>
+            </CurrentUserQuery>
           </Router>
         </ApolloProvider>
       </Provider>
