@@ -2,16 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
+import apolloClient from './shared/graphql/client';
+import CurrentUserQuery from './shared/graphql/userQueries';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './reset.css.js';
+import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
 import registerServiceWorker from './registerServiceWorker';
-
-const apolloClient = new ApolloClient({
-  uri: process.env.REACT_APP_API_ENDPOINT,
-});
+import './reset.css.js';
 
 class App extends React.Component {
   render() {
@@ -19,7 +17,11 @@ class App extends React.Component {
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
           <Router>
-            <Route exact path="/" component={MapScreen} />
+            <React.Fragment>
+              <MenuBar />
+              <Route component={CurrentUserQuery} />
+              <Route exact path="/" component={MapScreen} />
+            </React.Fragment>
           </Router>
         </ApolloProvider>
       </Provider>
