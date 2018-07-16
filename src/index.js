@@ -9,7 +9,9 @@ import './reset.css.js';
 import MapScreen from './views/MapScreen';
 import registerServiceWorker from './registerServiceWorker';
 
-const apolloClient = new ApolloClient({ uri: process.env.REACT_APP_API_ENDPOINT });
+const apolloClient = new ApolloClient({
+  uri: process.env.REACT_APP_API_ENDPOINT,
+});
 
 class App extends React.Component {
   render() {
