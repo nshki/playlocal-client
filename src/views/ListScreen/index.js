@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { timeFromNow } from '../../helpers/signals';
 import ClockIcon from '../../components/ClockIcon';
 import PinIcon from '../../components/PinIcon';
 import IconButton from '../../components/IconButton';
@@ -28,7 +29,7 @@ class ListScreen extends React.Component {
             <CardUsername>{signal.username}</CardUsername>
             <CardMetaText>
               <ClockIcon />
-              Available for 1 hr 13 min
+              Available for {timeFromNow(signal.endTime)}
             </CardMetaText>
             <CardMetaText>
               <PinIcon />
