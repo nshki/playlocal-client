@@ -28,6 +28,7 @@ export const CardHeader = styled.div`
 `;
 
 export const CardAvatar = styled.div`
+  background-color: #ffa800;
   background-image: url(${props => props.imageUrl});
   background-size: cover;
   background-position: center;
