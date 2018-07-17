@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { ApolloProvider } from 'react-apollo';
 import apolloClient from './shared/graphql/client';
-import CurrentUserQuery from './shared/graphql/userQueries';
+import LoadQuery from './shared/graphql/loadQuery';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
@@ -20,13 +20,13 @@ class App extends React.Component {
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
           <Router>
-            <CurrentUserQuery>
+            <LoadQuery>
               <MenuBar />
               <Route exact path="/" component={MapScreen} />
               <Route path="/" component={ControlBar} />
               <SignInOverlay />
               <MenuOverlay />
-            </CurrentUserQuery>
+            </LoadQuery>
           </Router>
         </ApolloProvider>
       </Provider>

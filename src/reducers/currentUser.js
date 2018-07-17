@@ -16,15 +16,15 @@ const initialState = {
 
 export default function currentUser(state = initialState, action) {
   switch (action.type) {
-    case 'UPDATE_CURRENT_USER':
-      if (!action.graphqlResult.currentUser) return state;
+    case 'UPDATE_APP_DATA':
+      if (!action.data.currentUser) return state;
 
       const {
         username,
         avatarPlatform,
         identities,
         playSignal,
-      } = action.graphqlResult.currentUser;
+      } = action.data.currentUser;
       const twitterIdentity = identities.find(i => i.provider === 'twitter');
       const discordIdentity = identities.find(i => i.provider === 'discord');
 

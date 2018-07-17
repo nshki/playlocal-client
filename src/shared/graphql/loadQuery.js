@@ -3,16 +3,15 @@ import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
 import authContext from './authContext';
 import { connect } from 'react-redux';
-import { updateCurrentUser } from '../../actions/currentUser';
+import { updateAppData } from '../../actions/appLoad';
 
-export const CURRENT_USER_QUERY = gql`
-  query CurrentUserQuery {
+export const LOAD_QUERY = gql`
+  query LoadQuery {
     currentUser {
       username
       avatarPlatform
       identities {
         provider
-        uid
         username
         imageUrl
       }
@@ -24,16 +23,31 @@ export const CURRENT_USER_QUERY = gql`
         published
       }
     }
+
+    activeSignals {
+      message
+      endTime
+      lat
+      lng
+      user {
+        username
+        avatarPlatform
+        identities {
+          provider
+          imageUrl
+        }
+      }
+    }
   }
 `;
 
-class CurrentUserQuery extends React.Component {
+class LoadQuery extends React.Component {
   render() {
-    const { onUserLoad, children } = this.props;
+    const { onLoad, children } = this.props;
     const context = authContext(window.location.search.replace('?', ''));
 
     return (
-      <Query query={CURRENT_USER_QUERY} context={context}>
+      <Query query={LOAD_QUERY} context={context}>
         {({ loading, error, data }) => {
           if (loading) {
             return null;
@@ -44,7 +58,7 @@ class CurrentUserQuery extends React.Component {
             return null;
           }
 
-          onUserLoad(data);
+          onLoad(data);
           return children;
         }}
       </Query>
@@ -58,11 +72,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onUserLoad: (data) => dispatch(updateCurrentUser(data)),
+    onLoad: (data) => dispatch(updateAppData(data)),
   };
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CurrentUserQuery);
+)(LoadQuery);

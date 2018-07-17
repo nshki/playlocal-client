@@ -1,8 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import MapGL, { Marker } from 'react-map-gl';
 import { geolocated } from 'react-geolocated';
-import { getAvatarForUser } from '../../helpers/users';
+import { getAvatarForCurrentUser } from '../../helpers/users';
 import { Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -55,15 +54,28 @@ class Map extends React.Component {
     if (coords) {
       return (
         <Marker
-          longitude={this.props.coords.longitude}
           latitude={this.props.coords.latitude}
+          longitude={this.props.coords.longitude}
         >
-          <Signal me imageUrl={getAvatarForUser(currentUser)} />
+          <Signal me imageUrl={getAvatarForCurrentUser(currentUser)} />
         </Marker>
       );
     }
 
     return false;
+  };
+
+  _renderSignals = () => {
+    const { signals } = this.props;
+    return signals.all.map((signal, i) => (
+      <Marker
+        key={`marker-${i}`}
+        latitude={signal.lat}
+        longitude={signal.lng}
+      >
+        <Signal imageUrl={signal.imageUrl} />
+      </Marker>
+    ));
   };
 
   render() {
@@ -75,27 +87,15 @@ class Map extends React.Component {
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
       >
         {this._renderMe()}
+        {this._renderSignals()}
       </MapGL>
     );
   }
 }
 
-const GeolocatedMap = geolocated({
+export default geolocated({
   positionOptions: {
     enableHighAccuracy: true,
   },
   watchPosition: true,
 })(Map);
-
-const mapStateToProps = (state) => {
-  return { currentUser: state.currentUser };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(GeolocatedMap);

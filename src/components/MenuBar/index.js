@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { showSignInOverlay, showMenuOverlay } from '../../actions/overlays';
-import { getAvatarForUser } from '../../helpers/users';
+import { getAvatarForCurrentUser } from '../../helpers/users';
 import SignInIcon from '../SignInIcon';
 import { Container, Logo, AvatarButton, SignInButton } from './style';
 
@@ -10,7 +10,7 @@ class MenuBar extends React.Component {
     const { currentUser, onSignInClick, onAvatarClick } = this.props;
     const action = currentUser.username ? (
       <AvatarButton
-        imageUrl={getAvatarForUser(currentUser)}
+        imageUrl={getAvatarForCurrentUser(currentUser)}
         onClick={onAvatarClick}
       />
     ) : (
