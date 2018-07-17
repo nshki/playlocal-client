@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   background-color: #1d1d1d;
@@ -15,7 +16,7 @@ export const Container = styled.div`
   right: 0;
 `;
 
-export const IconLink = styled.a`
+export const IconLink = styled(Link)`
   svg {
     fill: #fff;
     opacity: 0.7;

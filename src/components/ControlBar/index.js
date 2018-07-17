@@ -1,20 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ListIcon from '../ListIcon';
+import MapIcon from '../MapIcon';
 import { Container, IconLink, PublishToggle } from './style';
 
 class ControlBar extends React.Component {
   render() {
-    const { currentUser, signalPublished } = this.props;
+    const { currentUser, signalPublished, location } = this.props;
 
     if (!currentUser.username) return null;
+    const viewToggle = location.pathname === '/list' ?
+      (
+        <IconLink to="/">
+          <MapIcon />
+        </IconLink>
+      ) : (
+        <IconLink to="/list">
+          <ListIcon />
+        </IconLink>
+      );
 
     return (
       <Container>
-        <IconLink>
-          <ListIcon />
-        </IconLink>
-
+        {viewToggle}
         <PublishToggle published={signalPublished} />
       </Container>
     );

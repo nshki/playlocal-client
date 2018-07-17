@@ -8,6 +8,7 @@ import LoadQuery from './shared/graphql/loadQuery';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
+import ListScreen from './views/ListScreen';
 import ControlBar from './components/ControlBar';
 import SignInOverlay from './views/SignInOverlay';
 import MenuOverlay from './views/MenuOverlay';
@@ -19,15 +20,18 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
-          <Router>
-            <LoadQuery>
-              <MenuBar />
-              <Route exact path="/" component={MapScreen} />
-              <Route path="/" component={ControlBar} />
-              <SignInOverlay />
-              <MenuOverlay />
-            </LoadQuery>
-          </Router>
+          <LoadQuery>
+            <Router>
+              <React.Fragment>
+                <MenuBar />
+                <Route exact path="/" component={MapScreen} />
+                <Route exact path="/list" component={ListScreen} />
+                <Route path="/" component={ControlBar} />
+                <SignInOverlay />
+                <MenuOverlay />
+              </React.Fragment>
+            </Router>
+          </LoadQuery>
         </ApolloProvider>
       </Provider>
     );
