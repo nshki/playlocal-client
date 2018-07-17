@@ -52,7 +52,7 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const Text = styled.div`
+export const Text = styled.p`
   flex-grow: 1;
   font-weight: 700;
   font-size: 0.875rem;
