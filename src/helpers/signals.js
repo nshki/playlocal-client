@@ -12,7 +12,7 @@ import IconButton from '../components/IconButton';
  */
 export const timeFromNow = (timeStr) => {
   const format = 'YYYY-MM-DD HH:mm:ss';
-  return moment(timeStr, format).fromNow().replace('in', '').trim();
+  return moment.utc(timeStr, format).fromNow().replace('in', '').trim();
 };
 
 /**
