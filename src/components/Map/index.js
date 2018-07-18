@@ -16,11 +16,17 @@ class Map extends React.Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this._resize);
+    const { geolocation } = this.props;
+
+    if (geolocation.lat !== null && geolocation.lng !== null) {
+      this.centerOnGeolocation();
+    }
+
+    window.addEventListener('resize', this.resize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this._resize);
+    window.removeEventListener('resize', this.resize);
   }
 
   componentDidUpdate(prevProps) {
@@ -29,15 +35,11 @@ class Map extends React.Component {
       geolocation.lat !== null && prevProps.geolocation.lat === null &&
       geolocation.lng !== null && prevProps.geolocation.lng === null
     ) {
-      this._updateViewport({
-        ...this.state.viewport,
-        latitude: geolocation.lat,
-        longitude: geolocation.lng,
-      });
+      this.centerOnGeolocation();
     }
   }
 
-  _resize = () => {
+  resize = () => {
     this.setState({
       viewport: {
         ...this.state.viewport,
@@ -47,8 +49,17 @@ class Map extends React.Component {
     });
   };
 
-  _updateViewport = (viewport) => {
+  updateViewport = (viewport) => {
     this.setState({ viewport });
+  };
+
+  centerOnGeolocation = () => {
+    const { geolocation } = this.props;
+    this.updateViewport({
+      ...this.state.viewport,
+      latitude: geolocation.lat,
+      longitude: geolocation.lng,
+    });
   };
 
   _renderMe = () => {
@@ -85,7 +96,7 @@ class Map extends React.Component {
     return (
       <MapGL
         {...this.state.viewport}
-        onViewportChange={this._updateViewport}
+        onViewportChange={this.updateViewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
         mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
       >
