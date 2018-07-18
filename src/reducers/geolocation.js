@@ -1,14 +1,15 @@
 const initialState = {
-  latitude: null,
-  longitude: null,
+  lat: null,
+  lng: null,
 };
 
 export default function geolocation(state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_LOCATION':
+      if (action.coords === null) return state;
       return {
-        latitude: action.coords.latitude,
-        longitude: action.coords.longitude,
+        lat: action.coords.latitude,
+        lng: action.coords.longitude,
       };
     default:
       return state;

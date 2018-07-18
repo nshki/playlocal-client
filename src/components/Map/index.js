@@ -1,6 +1,5 @@
 import React from 'react';
 import MapGL, { Marker } from 'react-map-gl';
-import { geolocated } from 'react-geolocated';
 import { getAvatarForCurrentUser } from '../../helpers/users';
 import { Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -25,11 +24,15 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.coords !== null && prevProps.coords === null) {
+    const { geolocation } = this.props;
+    if (
+      geolocation.lat !== null && prevProps.geolocation.lat === null &&
+      geolocation.lng !== null && prevProps.geolocation.lng === null
+    ) {
       this._updateViewport({
         ...this.state.viewport,
-        latitude: this.props.coords.latitude,
-        longitude: this.props.coords.longitude,
+        latitude: geolocation.lat,
+        longitude: geolocation.lng,
       });
     }
   }
@@ -49,13 +52,13 @@ class Map extends React.Component {
   };
 
   _renderMe = () => {
-    const { coords, currentUser } = this.props;
+    const { geolocation, currentUser } = this.props;
 
-    if (coords) {
+    if (geolocation.lat !== null && geolocation.lng !== null) {
       return (
         <Marker
-          latitude={this.props.coords.latitude}
-          longitude={this.props.coords.longitude}
+          latitude={geolocation.lat}
+          longitude={geolocation.lng}
         >
           <Signal me imageUrl={getAvatarForCurrentUser(currentUser)} />
         </Marker>
@@ -93,9 +96,4 @@ class Map extends React.Component {
   }
 }
 
-export default geolocated({
-  positionOptions: {
-    enableHighAccuracy: true,
-  },
-  watchPosition: true,
-})(Map);
+export default Map;

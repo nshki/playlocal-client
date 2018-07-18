@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 import apolloClient from './shared/graphql/client';
 import LoadQuery from './shared/graphql/loadQuery';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Geolocator from './components/Geolocator';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
 import ListScreen from './views/ListScreen';
@@ -22,14 +23,14 @@ class App extends React.Component {
         <ApolloProvider client={apolloClient}>
           <LoadQuery>
             <Router>
-              <React.Fragment>
+              <Geolocator>
                 <MenuBar />
                 <Route exact path="/" component={MapScreen} />
                 <Route exact path="/list" component={ListScreen} />
                 <Route path="/" component={ControlBar} />
                 <SignInOverlay />
                 <MenuOverlay />
-              </React.Fragment>
+              </Geolocator>
             </Router>
           </LoadQuery>
         </ApolloProvider>
