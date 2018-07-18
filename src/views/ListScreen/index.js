@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { timeFromNow } from '../../helpers/signals';
+import { timeFromNow, distanceBetween } from '../../helpers/signals';
 import ClockIcon from '../../components/ClockIcon';
 import PinIcon from '../../components/PinIcon';
 import IconButton from '../../components/IconButton';
@@ -19,7 +19,7 @@ import {
 
 class ListScreen extends React.Component {
   renderCards = () => {
-    const { signals } = this.props;
+    const { signals, geolocation } = this.props;
 
     return signals.all.map((signal, i) => (
       <Card key={`card-${i}`}>
@@ -33,7 +33,7 @@ class ListScreen extends React.Component {
             </CardMetaText>
             <CardMetaText>
               <PinIcon />
-              0.1 mi
+              {distanceBetween(signal, geolocation)}
             </CardMetaText>
           </CardMeta>
         </CardHeader>
@@ -59,7 +59,10 @@ class ListScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { signals: state.signals };
+  return {
+    signals: state.signals,
+    geolocation: state.geolocation,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
