@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { timeFromNow, distanceBetween } from '../../helpers/signals';
+import {
+  timeFromNow,
+  distanceBetween,
+  twitterButton,
+  discordButton,
+} from '../../helpers/signals';
 import ClockIcon from '../../components/ClockIcon';
 import PinIcon from '../../components/PinIcon';
-import IconButton from '../../components/IconButton';
 import {
   Container,
   Card,
@@ -41,8 +45,8 @@ class ListScreen extends React.Component {
         <CardBody>
           <CardBodyMessage>{signal.message}</CardBodyMessage>
           <CardBodyActions>
-            <IconButton type="twitter">Contact via Twitter</IconButton>
-            <IconButton type="discord">Contact via Discord</IconButton>
+            {twitterButton(signal)}
+            {discordButton(signal)}
           </CardBodyActions>
         </CardBody>
       </Card>

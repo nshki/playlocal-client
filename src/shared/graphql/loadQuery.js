@@ -34,6 +34,7 @@ export const LOAD_QUERY = gql`
         avatarPlatform
         identities {
           provider
+          username
           imageUrl
         }
       }
