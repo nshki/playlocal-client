@@ -22,16 +22,18 @@ class App extends React.Component {
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
           <LoadQuery>
-            <Router>
-              <Geolocator>
-                <MenuBar />
-                <Route exact path="/" component={MapScreen} />
-                <Route exact path="/list" component={ListScreen} />
-                <Route path="/" component={ControlBar} />
-                <SignInOverlay />
-                <MenuOverlay />
-              </Geolocator>
-            </Router>
+            <Geolocator>
+              <Router>
+                <React.Fragment>
+                  <MenuBar />
+                  <Route exact path="/" component={MapScreen} />
+                  <Route exact path="/list" component={ListScreen} />
+                  <Route path="/" component={ControlBar} />
+                  <SignInOverlay />
+                  <MenuOverlay />
+                </React.Fragment>
+              </Router>
+            </Geolocator>
           </LoadQuery>
         </ApolloProvider>
       </Provider>
