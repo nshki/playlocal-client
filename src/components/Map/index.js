@@ -17,11 +17,9 @@ class Map extends React.Component {
 
   componentDidMount() {
     const { geolocation } = this.props;
-
     if (geolocation.lat !== null && geolocation.lng !== null) {
       this.centerOnGeolocation();
     }
-
     window.addEventListener('resize', this.resize);
   }
 
@@ -64,7 +62,6 @@ class Map extends React.Component {
 
   _renderMe = () => {
     const { geolocation, currentUser } = this.props;
-
     if (geolocation.lat !== null && geolocation.lng !== null) {
       return (
         <Marker
@@ -75,7 +72,6 @@ class Map extends React.Component {
         </Marker>
       );
     }
-
     return false;
   };
 
