@@ -25,7 +25,7 @@ class ListScreen extends React.Component {
   renderCards = () => {
     const { signals, geolocation } = this.props;
 
-    return signals.all.map((signal, i) => (
+    return signals.map((signal, i) => (
       <Card key={`card-${i}`}>
         <CardHeader>
           <CardAvatar imageUrl={signal.imageUrl} />
