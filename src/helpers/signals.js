@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { showCopyModalOverlay } from '../actions/overlays';
 import moment from 'moment';
 import haversine from 'haversine';
 import IconButton from '../components/IconButton';
@@ -55,16 +57,16 @@ export const twitterButton = (signal) => {
 };
 
 /**
- * Given a signal, generates the button to view the corresponding Discord user.
- * Returns null if Discord is not associated.
- *
- * @param {Object} signal
- * @returns {JSX | null}
+ * Functional component used for discordButton() function.
  */
-export const discordButton = (signal) => {
+const DiscordButton = connect(
+  (state) => ({}),
+  (dispatch) => ({ dispatch })
+)(({ signal, dispatch }) => {
   if (!signal.discordUsername) return null;
 
   const onClick = () => {
+    dispatch(showCopyModalOverlay(true, signal.discordUsername));
   };
 
   return (
@@ -72,4 +74,15 @@ export const discordButton = (signal) => {
       Contact via Discord
     </IconButton>
   );
-};
+});
+
+/**
+ * Given a signal, generates the button to view the corresponding Discord user.
+ * Returns null if Discord is not associated.
+ *
+ * @param {Object} signal
+ * @returns {JSX | null}
+ */
+export const discordButton = (signal) => (
+  <DiscordButton signal={signal} />
+);

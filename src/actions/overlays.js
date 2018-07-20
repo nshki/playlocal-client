@@ -23,3 +23,18 @@ export const showMenuOverlay = (visible) => {
     visible,
   };
 };
+
+/**
+ * Open/close copy modal overlay.
+ *
+ * @param {Boolean} visible
+ * @param {String} text
+ * @returns {Object}
+ */
+export const showCopyModalOverlay = (visible, text) => {
+  return {
+    type: 'TOGGLE_COPY_MODAL_OVERLAY',
+    visible,
+    text,
+  };
+};
