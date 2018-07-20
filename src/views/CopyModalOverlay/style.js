@@ -6,6 +6,7 @@ export const Container = styled.div`
   max-width: 325px;
   border-radius: 3px;
   text-align: center;
+  overflow: hidden;
 `;
 
 export const Label = styled.h3`
@@ -25,4 +26,8 @@ export const Text = styled.h2`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #fff;
+`;
+
+export const ButtonContainer = styled.div`
+  margin: 0 9px 9px;
 `;

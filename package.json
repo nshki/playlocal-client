@@ -11,6 +11,7 @@
     "qs": "^6.5.2",
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.4.1",
     "react-geolocated": "^2.4.0",
     "react-map-gl": "^3.3.0",
