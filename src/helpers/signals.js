@@ -18,18 +18,18 @@ export const timeFromNow = (timeStr) => {
 };
 
 /**
- * Given two sets of coordinates, outputs a string describing how far away they
- * are from each other.
+ * Given two sets of coordinates, outputs how far away they are from each other
+ * in miles.
  *
  * @param {Object} start { lat: Float, lng: Float }
  * @param {Object} end { lat: Float, lng: Float }
- * @returns {String}
+ * @returns {Number}
  */
 export const distanceBetween = (start, end) => {
   const p1 = { latitude: start.lat, longitude: start.lng };
   const p2 = { latitude: end.lat, longitude: end.lng };
   const distance = haversine(p1, p2, { unit: 'mile' });
-  return `${Math.round(distance * 10) / 10} mi`;
+  return (Math.round(distance * 10) / 10);
 };
 
 /**

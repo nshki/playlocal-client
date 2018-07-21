@@ -26,7 +26,17 @@ class ListScreen extends React.Component {
   renderCards = () => {
     const { signals, geolocation } = this.props;
 
-    return signals.map((signal, i) => (
+    // Calculate distance from each signal.
+    let sortedSignals = signals.map((signal) => {
+      return { ...signal, distance: distanceBetween(signal, geolocation) };
+    });
+
+    // Sort signals by distance.
+    sortedSignals.sort((a, b) => {
+      return a.distance - b.distance;
+    });
+
+    return sortedSignals.map((signal, i) => (
       <Card key={`card-${i}`}>
         <CardHeader>
           <CardAvatar imageUrl={signal.imageUrl} />
@@ -38,7 +48,7 @@ class ListScreen extends React.Component {
             </CardMetaText>
             <CardMetaText>
               <PinIcon />
-              {distanceBetween(signal, geolocation)}
+              {signal.distance} mi
             </CardMetaText>
           </CardMeta>
         </CardHeader>
