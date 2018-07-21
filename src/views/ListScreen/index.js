@@ -24,7 +24,7 @@ import {
 
 class ListScreen extends React.Component {
   renderCards = () => {
-    const { signals, geolocation } = this.props;
+    const { signals, geolocation, preferences } = this.props;
 
     // Calculate distance from each signal.
     let sortedSignals = signals.map((signal) => {
@@ -34,6 +34,11 @@ class ListScreen extends React.Component {
     // Sort signals by distance.
     sortedSignals.sort((a, b) => {
       return a.distance - b.distance;
+    });
+
+    // Filter out distances that don't fit within search radius.
+    sortedSignals = sortedSignals.filter((signal) => {
+      return signal.distance <= preferences.searchRadius;
     });
 
     return sortedSignals.map((signal, i) => (
@@ -81,6 +86,7 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser,
     signals: state.signals,
     geolocation: state.geolocation,
+    preferences: state.preferences,
   };
 };
 

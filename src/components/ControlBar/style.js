@@ -2,18 +2,29 @@ import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  background-color: #1d1d1d;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: 50px;
   padding: 0 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
   position: fixed;
   z-index: 2;
   bottom: 0;
   left: 0;
   right: 0;
+
+  &:before {
+    content: '';
+    background-color: #1d1d1d;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 `;
 
 export const IconLink = styled(Link)`
@@ -23,6 +34,50 @@ export const IconLink = styled(Link)`
     max-width: 26px;
     height: auto;
   }
+`;
+
+export const Dropdown = styled.div`
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+
+  svg {
+    fill: #fff;
+    margin-left: 10px;
+    transform: rotate(-90deg);
+  }
+`;
+
+export const DropdownItems = styled.div`
+  background-color: #1d1d1d;
+  position: absolute;
+  z-index: -2;
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.3s ease-in-out;
+
+  ${props => props.open && css`
+    transform: translate3d(0, -100%, 0);
+  `}
+`;
+
+export const DropdownItem = styled.button`
+  background-color: #1d1d1d;
+  display: block;
+  width: 100%;
+  padding: 13px 15px;
+  border-bottom: 1px solid #707070;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 export const PublishToggle = styled.a`

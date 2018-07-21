@@ -57,5 +57,6 @@ export const Text = styled.p`
   font-weight: 700;
   font-size: 0.875rem;
   text-align: left;
+  text-shadow: 0 0px 3px rgba(0, 0, 0, 0.5);
   color: #fff;
 `;

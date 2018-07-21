@@ -3,6 +3,7 @@ import currentUser from './currentUser';
 import geolocation from './geolocation';
 import overlays from './overlays';
 import signals from './signals';
+import preferences from './preferences';
 
 const getReducers = () => {
   return combineReducers({
@@ -10,6 +11,7 @@ const getReducers = () => {
     geolocation,
     overlays,
     signals,
+    preferences,
   });
 };
 
