@@ -41,32 +41,45 @@ class ListScreen extends React.Component {
       return signal.distance <= preferences.searchRadius;
     });
 
-    return sortedSignals.map((signal, i) => (
-      <Card key={`card-${i}`}>
-        <CardHeader>
-          <CardAvatar imageUrl={signal.imageUrl} />
-          <CardMeta>
-            <CardUsername>{signal.username}</CardUsername>
-            <CardMetaText>
-              <ClockIcon />
-              Available for {timeFromNow(signal.endTime)}
-            </CardMetaText>
-            <CardMetaText>
-              <PinIcon />
-              {signal.distance} mi
-            </CardMetaText>
-          </CardMeta>
-        </CardHeader>
+    if (sortedSignals.length > 0) {
+      return sortedSignals.map((signal, i) => (
+        <Card key={`card-${i}`}>
+          <CardHeader>
+            <CardAvatar imageUrl={signal.imageUrl} />
+            <CardMeta>
+              <CardUsername>{signal.username}</CardUsername>
+              <CardMetaText>
+                <ClockIcon />
+                Available for {timeFromNow(signal.endTime)}
+              </CardMetaText>
+              <CardMetaText>
+                <PinIcon />
+                {signal.distance} mi
+              </CardMetaText>
+            </CardMeta>
+          </CardHeader>
 
+          <CardBody>
+            <CardBodyMessage>{signal.message}</CardBodyMessage>
+            <CardBodyActions>
+              {twitterButton(signal)}
+              {discordButton(signal)}
+            </CardBodyActions>
+          </CardBody>
+        </Card>
+      ));
+    }
+
+    return (
+      <Card>
         <CardBody>
-          <CardBodyMessage>{signal.message}</CardBodyMessage>
-          <CardBodyActions>
-            {twitterButton(signal)}
-            {discordButton(signal)}
-          </CardBodyActions>
+          <CardBodyMessage>
+            No one is available within this search radius. :'( Try expanding
+            your search?
+          </CardBodyMessage>
         </CardBody>
       </Card>
-    ));
+    );
   };
 
   render() {
