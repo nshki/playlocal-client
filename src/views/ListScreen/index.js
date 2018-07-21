@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import {
   timeFromNow,
   distanceBetween,
@@ -54,6 +55,9 @@ class ListScreen extends React.Component {
   };
 
   render() {
+    const { currentUser } = this.props;
+    if (!currentUser.username) return <Redirect to="/" />;
+
     return (
       <Container>
         {this.renderCards()}
@@ -64,6 +68,7 @@ class ListScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    currentUser: state.currentUser,
     signals: state.signals,
     geolocation: state.geolocation,
   };

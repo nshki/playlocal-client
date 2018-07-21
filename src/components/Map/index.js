@@ -11,7 +11,7 @@ class Map extends React.Component {
       height: window.innerHeight,
       latitude: 37.785164,
       longitude: -100,
-      zoom: 8,
+      zoom: 13,
     }
   };
 
@@ -77,7 +77,7 @@ class Map extends React.Component {
 
   _renderSignals = () => {
     const { signals } = this.props;
-    return signals.all.map((signal, i) => (
+    return signals.map((signal, i) => (
       <Marker
         key={`marker-${i}`}
         latitude={signal.lat}
