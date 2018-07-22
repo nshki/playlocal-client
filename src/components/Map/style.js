@@ -48,7 +48,7 @@ export const Signal = styled.div`
       animation: ${pulse} 1.5s ease-in-out infinite;
     }
 
-    &:after {
+    a {
       background-color: #0094ff;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     }

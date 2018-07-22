@@ -50,7 +50,7 @@ export const twitterButton = (signal) => {
   };
 
   return (
-    <IconButton onClick={onClick} type="twitter">
+    <IconButton tall onClick={onClick} type="twitter">
       Contact via Twitter
     </IconButton>
   );
@@ -70,7 +70,7 @@ const DiscordButton = connect(
   };
 
   return (
-    <IconButton onClick={onClick} type="discord">
+    <IconButton tall onClick={onClick} type="discord">
       Contact via Discord
     </IconButton>
   );
