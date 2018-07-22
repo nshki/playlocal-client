@@ -70,7 +70,7 @@ class Map extends React.Component {
           longitude={geolocation.lng}
         >
           <Signal me imageUrl={getAvatarForCurrentUser(currentUser)}>
-            <Link to={`/signal/${currentUser.username}`} />
+            <Link to={`/signal`} />
           </Signal>
         </Marker>
       );
@@ -79,18 +79,21 @@ class Map extends React.Component {
   };
 
   _renderSignals = () => {
-    const { signals } = this.props;
-    return signals.map((signal, i) => (
-      <Marker
-        key={`marker-${i}`}
-        latitude={signal.lat}
-        longitude={signal.lng}
-      >
-        <Signal imageUrl={signal.imageUrl}>
-          <Link to={`/signal/${signal.username}`} />
-        </Signal>
-      </Marker>
-    ));
+    const { signals, currentUser } = this.props;
+    return signals.map((signal, i) => {
+      if (signal.username === currentUser.username) return null;
+      return (
+        <Marker
+          key={`marker-${i}`}
+          latitude={signal.lat}
+          longitude={signal.lng}
+        >
+          <Signal imageUrl={signal.imageUrl}>
+            <Link to={`/signal/${signal.username}`} />
+          </Signal>
+        </Marker>
+      );
+    });
   };
 
   render() {
