@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Datetime from 'react-datetime';
+import { updateSignal } from '../../actions/currentUser';
 import MessageIcon from '../../components/MessageIcon';
 import ClockIcon from '../../components/ClockIcon';
 import {
@@ -17,6 +18,7 @@ class EditSignalScreen extends React.Component {
   state = { pickerOpen: false };
 
   render() {
+    const { lat, lng, message, endTime, updateSignal } = this.props;
     const { pickerOpen } = this.state;
 
     return (
@@ -30,6 +32,8 @@ class EditSignalScreen extends React.Component {
           </FieldLabel>
           <TextArea
             placeholder="Looking to play at..."
+            defaultValue={message}
+            onChange={(e) => updateSignal(e.target.value, endTime, lat, lng)}
           />
         </FieldContainer>
 
@@ -42,8 +46,7 @@ class EditSignalScreen extends React.Component {
             <Datetime
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
-              dateFormat="YYYY-MM-DD"
-              timeFormat="h:mm A Z"
+              onChange={(dt) => updateSignal(message, dt.format(), lat, lng)}
               isValidDate={(current) => {
                 const yesterday = Datetime.moment().subtract(1, 'day');
                 return current.isAfter(yesterday);
@@ -57,11 +60,21 @@ class EditSignalScreen extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  const { geolocation, currentUser } = state;
+  return {
+    lat: geolocation.lat,
+    lng: geolocation.lng,
+    message: currentUser.signalMessage,
+    endTime: currentUser.signalEndTime,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {};
+  return {
+    updateSignal: (message, endTime, lat, lng) => {
+      dispatch(updateSignal(message, endTime, lat, lng));
+    },
+  };
 };
 
 export default connect(

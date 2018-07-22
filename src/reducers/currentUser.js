@@ -41,6 +41,15 @@ export default function currentUser(state = initialState, action) {
         signalLng: playSignal.lng,
         signalMessage: playSignal.message,
       };
+    case 'UPDATE_CURRENT_USER_SIGNAL':
+      const { message, endTime, lat, lng } = action;
+      return {
+        ...state,
+        signalMessage: message,
+        signalEndTime: endTime,
+        signalLat: lat,
+        signalLng: lng,
+      };
     case 'CLEAR_CURRENT_USER':
       removeFromStorage('token');
       return initialState;
