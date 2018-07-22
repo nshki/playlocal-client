@@ -46,7 +46,6 @@ class EditSignalScreen extends React.Component {
       navigator.permissions && navigator.permissions.query({
         name: 'geolocation',
       }).then((status) => {
-        console.log(status);
         if (status.state !== 'granted') {
           this.setState({ geolocationEnabled: false });
         }
