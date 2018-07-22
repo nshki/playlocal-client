@@ -42,6 +42,8 @@ class EditSignalScreen extends React.Component {
             <Datetime
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
+              dateFormat="YYYY-MM-DD"
+              timeFormat="h:mm A Z"
               isValidDate={(current) => {
                 const yesterday = Datetime.moment().subtract(1, 'day');
                 return current.isAfter(yesterday);
