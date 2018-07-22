@@ -45,10 +45,9 @@ export const LOAD_QUERY = gql`
 class LoadQuery extends React.Component {
   render() {
     const { onLoad, children } = this.props;
-    const context = authContext(window.location.search.replace('?', ''));
 
     return (
-      <Query query={LOAD_QUERY} context={context}>
+      <Query query={LOAD_QUERY} context={authContext()}>
         {({ loading, error, data }) => {
           if (loading) {
             return null;

@@ -42,9 +42,10 @@ export default function currentUser(state = initialState, action) {
         signalMessage: playSignal.message,
       };
     case 'UPDATE_CURRENT_USER_SIGNAL':
-      const { message, endTime, lat, lng } = action;
+      const { published, message, endTime, lat, lng } = action;
       return {
         ...state,
+        signalPublished: published,
         signalMessage: message,
         signalEndTime: endTime,
         signalLat: lat,

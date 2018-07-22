@@ -12,11 +12,17 @@ export const clearCurrentUser = () => {
 /**
  * Updates current user's signal.
  *
+ * @param {Boolean} published
+ * @param {String} message
+ * @param {String} endTime
+ * @param {Number} lat
+ * @param {Number} lng
  * @returns {Object}
  */
-export const updateSignal = (message, endTime, lat, lng) => {
+export const updateSignal = (published, message, endTime, lat, lng) => {
   return {
     type: 'UPDATE_CURRENT_USER_SIGNAL',
+    published,
     message,
     endTime,
     lat,

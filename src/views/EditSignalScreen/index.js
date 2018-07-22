@@ -18,7 +18,7 @@ class EditSignalScreen extends React.Component {
   state = { pickerOpen: false };
 
   render() {
-    const { lat, lng, message, endTime, updateSignal } = this.props;
+    const { published, lat, lng, message, endTime, updateSignal } = this.props;
     const { pickerOpen } = this.state;
 
     return (
@@ -33,7 +33,15 @@ class EditSignalScreen extends React.Component {
           <TextArea
             placeholder="Looking to play at..."
             defaultValue={message}
-            onChange={(e) => updateSignal(e.target.value, endTime, lat, lng)}
+            onChange={(e) => {
+              updateSignal(
+                published,
+                e.target.value,
+                endTime,
+                lat,
+                lng
+              );
+            }}
           />
         </FieldContainer>
 
@@ -46,7 +54,15 @@ class EditSignalScreen extends React.Component {
             <Datetime
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
-              onChange={(dt) => updateSignal(message, dt.format(), lat, lng)}
+              onChange={(dt) => {
+                updateSignal(
+                  published,
+                  message,
+                  dt.format(),
+                  lat,
+                  lng
+                );
+              }}
               isValidDate={(current) => {
                 const yesterday = Datetime.moment().subtract(1, 'day');
                 return current.isAfter(yesterday);
@@ -62,6 +78,7 @@ class EditSignalScreen extends React.Component {
 const mapStateToProps = (state) => {
   const { geolocation, currentUser } = state;
   return {
+    published: currentUser.signalPublished,
     lat: geolocation.lat,
     lng: geolocation.lng,
     message: currentUser.signalMessage,

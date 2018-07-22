@@ -1,7 +1,8 @@
 import qs from 'qs';
 import { getFromStorage, setInStorage } from '../../helpers/localStorage';
 
-const authContext = (queryParams) => {
+const authContext = () => {
+  const queryParams = window.location.search.replace(window.location.search.replace('?', ''));
   let token = getFromStorage('token');
   const params = qs.parse(queryParams);
 

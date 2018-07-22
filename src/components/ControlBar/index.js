@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setSearchRadius } from '../../actions/preferences';
+import UpdateSignalButton from '../../shared/graphql/updateSignalMutation';
 import ListIcon from '../ListIcon';
 import MapIcon from '../MapIcon';
 import CaretIcon from '../CaretIcon';
-import Button from '../Button';
 import {
   Container,
   IconLink,
@@ -70,23 +70,9 @@ class ControlBar extends React.Component {
   renderAction = () => {
     const { location, signalPublished } = this.props;
     if (location.pathname === '/signal') {
-      if (signalPublished) {
-        return (
-          <Button>
-            Unpublish
-          </Button>
-        );
-      } else {
-        return (
-          <Button isAction={true}>
-            Publish
-          </Button>
-        );
-      }
+      return <UpdateSignalButton />;
     } else {
-      return (
-        <PublishToggle published={signalPublished} />
-      );
+      return <PublishToggle published={signalPublished} />;
     }
   };
 
