@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 80%;
+  max-width: 325px;
 
   & > * {
     margin: 6px 0;

@@ -6,11 +6,6 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 15px;
-`;
-
-export const Action = styled.button`
-  background-color: transparent;
-  font-weight: 700;
-  font-size: 2rem;
-  color: #fff;
+  width: 100%;
+  max-width: 325px;
 `;
