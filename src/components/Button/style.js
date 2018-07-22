@@ -12,7 +12,7 @@ export const Container = styled.button`
   letter-spacing: 0.1em;
   color: #fff;
 
-  ${props => props.action && css`
+  ${props => props.isAction && css`
     background-color: #ff8a00;
   `}
 `;

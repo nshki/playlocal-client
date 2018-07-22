@@ -78,7 +78,7 @@ class ControlBar extends React.Component {
         );
       } else {
         return (
-          <Button action={true}>
+          <Button isAction={true}>
             Publish
           </Button>
         );
