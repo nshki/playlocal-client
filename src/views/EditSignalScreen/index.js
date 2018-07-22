@@ -16,7 +16,7 @@ import {
 import 'react-datetime/css/react-datetime.css';
 
 class EditSignalScreen extends React.Component {
-  state = { pickerOpen: false };
+  state = { geolocationEnabled: true, pickerOpen: false };
 
   render() {
     const {
@@ -28,13 +28,30 @@ class EditSignalScreen extends React.Component {
       endTime,
       updateSignal,
     } = this.props;
-    const { pickerOpen } = this.state;
+    const { geolocationEnabled, pickerOpen } = this.state;
 
+    // Redirect user if they're not signed in.
     if (!currentUser.username) return <Redirect to="/" />;
 
+    // Set default time. If the user is signed in and they have an active
+    // signal, set the time to that.
     let defaultTime = new Date();
     defaultTime.setHours(defaultTime.getHours() + 1);
     if (published && endTime) defaultTime = new Date(endTime);
+
+    // Check for geolocation permissions.
+    if (!navigator || !navigator.permissions) {
+      this.setState({ geolocationEnabled: false });
+    } else {
+      navigator.permissions && navigator.permissions.query({
+        name: 'geolocation',
+      }).then((status) => {
+        console.log(status);
+        if (status.state !== 'granted') {
+          this.setState({ geolocationEnabled: false });
+        }
+      });
+    }
 
     return (
       <Container>
@@ -86,6 +103,14 @@ class EditSignalScreen extends React.Component {
             />
           </DatetimeContainer>
         </FieldContainer>
+
+        {!geolocationEnabled &&
+          <FieldContainer>
+            <FieldLabel>
+              You must enable geolocation.
+            </FieldLabel>
+          </FieldContainer>
+        }
       </Container>
     );
   }
