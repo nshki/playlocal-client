@@ -5,10 +5,11 @@ import store from './store';
 import { ApolloProvider } from 'react-apollo';
 import apolloClient from './shared/graphql/client';
 import LoadQuery from './shared/graphql/loadQuery';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Geolocator from './components/Geolocator';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
+import SignalScreen from './views/SignalScreen';
 import ListScreen from './views/ListScreen';
 import ControlBar from './components/ControlBar';
 import SignInOverlay from './views/SignInOverlay';
@@ -24,17 +25,18 @@ class App extends React.Component {
         <ApolloProvider client={apolloClient}>
           <LoadQuery>
             <Geolocator>
-              <Router>
+              <BrowserRouter>
                 <React.Fragment>
                   <MenuBar />
-                  <Route exact path="/" component={MapScreen} />
+                  <Route path="/" component={MapScreen} />
+                  <Route path="/signal/:username" component={SignalScreen} />
                   <Route exact path="/list" component={ListScreen} />
                   <Route path="/" component={ControlBar} />
                   <SignInOverlay />
                   <MenuOverlay />
                   <CopyModalOverlay />
                 </React.Fragment>
-              </Router>
+              </BrowserRouter>
             </Geolocator>
           </LoadQuery>
         </ApolloProvider>

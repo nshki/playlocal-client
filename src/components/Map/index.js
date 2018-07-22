@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import MapGL, { Marker } from 'react-map-gl';
 import { getAvatarForCurrentUser } from '../../helpers/users';
 import { Signal } from './style';
@@ -68,7 +69,9 @@ class Map extends React.Component {
           latitude={geolocation.lat}
           longitude={geolocation.lng}
         >
-          <Signal me imageUrl={getAvatarForCurrentUser(currentUser)} />
+          <Signal me imageUrl={getAvatarForCurrentUser(currentUser)}>
+            <Link to={`/signal/${currentUser.username}`} />
+          </Signal>
         </Marker>
       );
     }
@@ -83,7 +86,9 @@ class Map extends React.Component {
         latitude={signal.lat}
         longitude={signal.lng}
       >
-        <Signal imageUrl={signal.imageUrl} />
+        <Signal imageUrl={signal.imageUrl}>
+          <Link to={`/signal/${signal.username}`} />
+        </Signal>
       </Marker>
     ));
   };

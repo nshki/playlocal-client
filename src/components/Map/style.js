@@ -17,8 +17,7 @@ export const Signal = styled.div`
   height: 23px;
   position: relative;
 
-  &:after {
-    content: '';
+  a {
     background-color: #ff8a00;
     background-image: url(${props => props.imageUrl});
     background-size: cover;
@@ -32,6 +31,7 @@ export const Signal = styled.div`
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     position: relative;
     z-index: 2;
+    cursor: pointer;
   }
 
   ${props => props.me && css`

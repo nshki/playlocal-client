@@ -112,3 +112,18 @@ export const PublishToggle = styled.a`
     }
   `}
 `;
+
+export const BackButton = styled(Link)`
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+
+  svg {
+    fill: #fff;
+    margin-right: 6px;
+    vertical-align: middle;
+    transform: rotate(-180deg);
+  }
+`;

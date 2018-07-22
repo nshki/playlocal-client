@@ -11,6 +11,7 @@ import {
   DropdownItems,
   DropdownItem,
   PublishToggle,
+  BackButton,
 } from './style';
 
 class ControlBar extends React.Component {
@@ -66,15 +67,26 @@ class ControlBar extends React.Component {
   };
 
   render() {
-    const { currentUser, signalPublished } = this.props;
+    const { location, currentUser, signalPublished } = this.props;
     if (!currentUser.username) return null;
-    return (
-      <Container>
-        {this.renderScreenIcon()}
-        {this.renderDropdown()}
-        <PublishToggle published={signalPublished} />
-      </Container>
-    );
+    if (location.pathname.indexOf('/signal/') === 0) {
+      return (
+        <Container>
+          <BackButton to="/">
+            <CaretIcon />
+            Back
+          </BackButton>
+        </Container>
+      );
+    } else {
+      return (
+        <Container>
+          {this.renderScreenIcon()}
+          {this.renderDropdown()}
+          <PublishToggle published={signalPublished} />
+        </Container>
+      );
+    }
   }
 }
 
