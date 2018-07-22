@@ -10,6 +10,7 @@ import Geolocator from './components/Geolocator';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
 import SignalScreen from './views/SignalScreen';
+import EditSignalScreen from './views/EditSignalScreen';
 import ListScreen from './views/ListScreen';
 import ControlBar from './components/ControlBar';
 import SignInOverlay from './views/SignInOverlay';
@@ -31,6 +32,7 @@ class App extends React.Component {
                   <Route path="/" component={MapScreen} />
                   <Route path="/signal/:username" component={SignalScreen} />
                   <Route exact path="/list" component={ListScreen} />
+                  <Route exact path="/signal" component={EditSignalScreen} />
                   <Route path="/" component={ControlBar} />
                   <SignInOverlay />
                   <MenuOverlay />
