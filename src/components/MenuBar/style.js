@@ -34,6 +34,7 @@ export const AvatarButton = styled.button`
   height: 28px;
   border: 2px solid #fff;
   border-radius: 100%;
+  cursor: pointer;
 `;
 
 export const SignInButton = styled.button`
