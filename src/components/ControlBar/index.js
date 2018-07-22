@@ -72,7 +72,12 @@ class ControlBar extends React.Component {
     if (location.pathname === '/signal') {
       return <UpdateSignalButton />;
     } else {
-      return <PublishToggle published={signalPublished} />;
+      return (
+        <PublishToggle
+          params={{ published: signalPublished }}
+          to="/signal"
+        />
+      );
     }
   };
 
@@ -85,6 +90,16 @@ class ControlBar extends React.Component {
             <CaretIcon />
             Back
           </BackButton>
+        </Container>
+      );
+    } else if (location.pathname === '/signal') {
+      return (
+        <Container>
+          <BackButton to="/">
+            <CaretIcon />
+            Back
+          </BackButton>
+          {this.renderAction()}
         </Container>
       );
     } else {

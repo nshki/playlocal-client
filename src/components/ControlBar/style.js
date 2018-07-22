@@ -84,7 +84,7 @@ export const DropdownItem = styled.button`
   color: rgba(255, 255, 255, 0.8);
 `;
 
-export const PublishToggle = styled.a`
+export const PublishToggle = styled(Link)`
   background-color: #707070;
   display: block;
   width: 37px;
@@ -107,7 +107,7 @@ export const PublishToggle = styled.a`
     transition: all 0.2s ease-in-out;
   }
 
-  ${props => props.published && css`
+  ${props => props.params.published && css`
     background-color: #ff8a00;
 
     &:after {
