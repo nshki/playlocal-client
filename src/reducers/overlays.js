@@ -3,6 +3,8 @@ const initialState = {
   showMenuOverlay: false,
   showCopyModalOverlay: false,
   copyModalText: '',
+  showErrorModalOverlay: false,
+  errorModalText: '',
 };
 
 export default function overlays(state = initialState, action) {
@@ -16,6 +18,12 @@ export default function overlays(state = initialState, action) {
         ...state,
         showCopyModalOverlay: action.visible,
         copyModalText: action.text || state.copyModalText,
+      };
+    case 'TOGGLE_ERROR_MODAL_OVERLAY':
+      return {
+        ...state,
+        showErrorModalOverlay: action.visible,
+        errorModalText: action.text || state.errorModalText,
       };
     default:
       return state;

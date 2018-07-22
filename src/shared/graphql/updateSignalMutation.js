@@ -4,6 +4,7 @@ import { gql } from 'apollo-boost';
 import { Mutation } from 'react-apollo';
 import authContext from './authContext';
 import { updateSignal } from '../../actions/currentUser';
+import { showErrorModalOverlay } from '../../actions/overlays';
 import Button from '../../components/Button';
 
 const UPDATE_SIGNAL = gql`
@@ -17,6 +18,7 @@ const UPDATE_SIGNAL = gql`
 class UpdateSignalButton extends React.Component {
   render() {
     const {
+      showErrorModalOverlay,
       updateSignalState,
       published,
       message,
@@ -40,6 +42,8 @@ class UpdateSignalButton extends React.Component {
               signalLat,
               signalLng,
             );
+          } else {
+            showErrorModalOverlay(updateSignal.errors.join());
           }
         }}
       >
@@ -84,6 +88,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    showErrorModalOverlay: (text) => {
+      dispatch(showErrorModalOverlay(true, text));
+    },
     updateSignalState: (published, message, endTime, lat, lng) => {
       dispatch(updateSignal(published, message, endTime, lat, lng));
     },

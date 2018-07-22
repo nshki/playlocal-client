@@ -38,3 +38,18 @@ export const showCopyModalOverlay = (visible, text) => {
     text,
   };
 };
+
+/**
+ * Open/close error modal overlay.
+ *
+ * @param {Boolean} visible
+ * @param {String} text
+ * @returns {Object}
+ */
+export const showErrorModalOverlay = (visible, text) => {
+  return {
+    type: 'TOGGLE_ERROR_MODAL_OVERLAY',
+    visible,
+    text,
+  };
+};

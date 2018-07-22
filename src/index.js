@@ -16,6 +16,7 @@ import ControlBar from './components/ControlBar';
 import SignInOverlay from './views/SignInOverlay';
 import MenuOverlay from './views/MenuOverlay';
 import CopyModalOverlay from './views/CopyModalOverlay';
+import ErrorModalOverlay from './views/ErrorModalOverlay';
 import registerServiceWorker from './registerServiceWorker';
 import './reset.css.js';
 
@@ -37,6 +38,7 @@ class App extends React.Component {
                   <SignInOverlay />
                   <MenuOverlay />
                   <CopyModalOverlay />
+                  <ErrorModalOverlay />
                 </React.Fragment>
               </BrowserRouter>
             </Geolocator>
