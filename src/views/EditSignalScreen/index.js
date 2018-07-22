@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Datetime from 'react-datetime';
 import MessageIcon from '../../components/MessageIcon';
 import ClockIcon from '../../components/ClockIcon';
 import {
@@ -8,15 +9,21 @@ import {
   FieldContainer,
   FieldLabel,
   TextArea,
+  DatetimeContainer,
 } from './style';
+import 'react-datetime/css/react-datetime.css';
 
 class EditSignalScreen extends React.Component {
+  state = { pickerOpen: false };
+
   render() {
+    const { pickerOpen } = this.state;
+
     return (
       <Container>
-        <Title>My Signal</Title>
+        <Title opaque={pickerOpen}>My Signal</Title>
 
-        <FieldContainer>
+        <FieldContainer opaque={pickerOpen}>
           <FieldLabel>
             Message
             <MessageIcon />
@@ -31,6 +38,16 @@ class EditSignalScreen extends React.Component {
             Available Until
             <ClockIcon />
           </FieldLabel>
+          <DatetimeContainer>
+            <Datetime
+              onFocus={() => this.setState({ pickerOpen: true })}
+              onBlur={() => this.setState({ pickerOpen: false })}
+              isValidDate={(current) => {
+                const yesterday = Datetime.moment().subtract(1, 'day');
+                return current.isAfter(yesterday);
+              }}
+            />
+          </DatetimeContainer>
         </FieldContainer>
       </Container>
     );
