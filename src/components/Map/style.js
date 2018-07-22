@@ -37,7 +37,7 @@ export const Signal = styled.div`
   ${props => props.me && css`
     &:before {
       content: '';
-      background-color: rgba(255, 138, 0, 0.7);
+      background-color: rgba(0, 148, 255, 0.7);
       width: 100%;
       height: 100%;
       display: block;
@@ -51,6 +51,12 @@ export const Signal = styled.div`
     a {
       background-color: #0094ff;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+  `}
+
+  ${props => props.me && props.published && css`
+    &:before {
+      background-color: rgba(255, 138, 0, 0.7);
     }
   `}
 `;

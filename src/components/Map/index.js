@@ -81,7 +81,11 @@ class Map extends React.Component {
           latitude={lat}
           longitude={lng}
         >
-          <Signal me imageUrl={getAvatarForCurrentUser(currentUser)}>
+          <Signal
+            me
+            published={currentUser.signalPublished}
+            imageUrl={getAvatarForCurrentUser(currentUser)}
+          >
             <Link to={`/signal`} />
           </Signal>
         </Marker>
