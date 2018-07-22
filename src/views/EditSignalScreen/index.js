@@ -29,7 +29,11 @@ class EditSignalScreen extends React.Component {
       updateSignal,
     } = this.props;
     const { pickerOpen } = this.state;
+
     if (!currentUser.username) return <Redirect to="/" />;
+    let hourFromNow = new Date();
+    hourFromNow.setHours(hourFromNow.getHours() + 1);
+
     return (
       <Container>
         <Title opaque={pickerOpen}>My Signal</Title>
@@ -61,7 +65,7 @@ class EditSignalScreen extends React.Component {
           </FieldLabel>
           <DatetimeContainer>
             <Datetime
-              defaultValue={new Date()}
+              defaultValue={hourFromNow}
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
               onChange={(dt) => {
