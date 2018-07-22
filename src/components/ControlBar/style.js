@@ -53,7 +53,14 @@ export const Dropdown = styled.div`
     fill: #fff;
     margin-left: 10px;
     transform: rotate(-90deg);
+    transition: all 0.2s ease-in-out;
   }
+
+  ${props => props.open && css`
+    svg {
+      transform: rotate(90deg);
+    }
+  `}
 `;
 
 export const DropdownItems = styled.div`
@@ -74,7 +81,6 @@ export const DropdownItems = styled.div`
 export const DropdownItem = styled.button`
   background-color: #1d1d1d;
   display: block;
-  width: 100%;
   padding: 13px 15px;
   border-bottom: 1px solid #707070;
   font-weight: 700;
@@ -82,6 +88,10 @@ export const DropdownItem = styled.button`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.8);
+
+  ${DropdownItems} > & {
+    width: 100%;
+  }
 `;
 
 export const PublishToggle = styled(Link)`

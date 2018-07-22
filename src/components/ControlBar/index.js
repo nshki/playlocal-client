@@ -49,7 +49,7 @@ class ControlBar extends React.Component {
     const { dropdownOpen } = this.state;
     if (location.pathname !== '/list') return null;
     return (
-      <Dropdown onClick={this.onDropdownClick}>
+      <Dropdown open={dropdownOpen} onClick={this.onDropdownClick}>
         Search radius: {preferences.searchRadius} mi
         <CaretIcon />
 
