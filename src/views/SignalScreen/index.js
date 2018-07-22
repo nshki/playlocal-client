@@ -59,6 +59,15 @@ class SignalScreen extends React.Component {
     } else {
       return (
         <Container>
+          <Meta>
+            <MetaContent>
+              <Username>{username}</Username>
+            </MetaContent>
+          </Meta>
+
+          <Message>
+            User does not have an active signal. Try exploring nearby?
+          </Message>
         </Container>
       );
     }
