@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router';
 import Datetime from 'react-datetime';
 import { updateSignal } from '../../actions/currentUser';
 import MessageIcon from '../../components/MessageIcon';
@@ -18,9 +19,17 @@ class EditSignalScreen extends React.Component {
   state = { pickerOpen: false };
 
   render() {
-    const { published, lat, lng, message, endTime, updateSignal } = this.props;
+    const {
+      currentUser,
+      published,
+      lat,
+      lng,
+      message,
+      endTime,
+      updateSignal,
+    } = this.props;
     const { pickerOpen } = this.state;
-
+    if (!currentUser.username) return <Redirect to="/" />;
     return (
       <Container>
         <Title opaque={pickerOpen}>My Signal</Title>
@@ -78,6 +87,7 @@ class EditSignalScreen extends React.Component {
 const mapStateToProps = (state) => {
   const { geolocation, currentUser } = state;
   return {
+    currentUser,
     published: currentUser.signalPublished,
     lat: geolocation.lat,
     lng: geolocation.lng,
