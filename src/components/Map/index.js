@@ -63,11 +63,23 @@ class Map extends React.Component {
 
   _renderMe = () => {
     const { geolocation, currentUser } = this.props;
-    if (geolocation.lat !== null && geolocation.lng !== null) {
+    let lat = geolocation.lat;
+    let lng = geolocation.lng;
+
+    if (
+      currentUser.signalPublished &&
+      currentUser.signalLat &&
+      currentUser.signalLng
+    ) {
+      lat = currentUser.signalLat;
+      lng = currentUser.signalLng;
+    }
+
+    if (lat !== null && lng !== null) {
       return (
         <Marker
-          latitude={geolocation.lat}
-          longitude={geolocation.lng}
+          latitude={lat}
+          longitude={lng}
         >
           <Signal me imageUrl={getAvatarForCurrentUser(currentUser)}>
             <Link to={`/signal`} />
@@ -75,6 +87,7 @@ class Map extends React.Component {
         </Marker>
       );
     }
+
     return false;
   };
 

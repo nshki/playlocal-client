@@ -37,7 +37,7 @@ export const Signal = styled.div`
   ${props => props.me && css`
     &:before {
       content: '';
-      background-color: rgba(0, 148, 255, 0.7);
+      background-color: rgba(255, 138, 0, 0.7);
       width: 100%;
       height: 100%;
       display: block;
