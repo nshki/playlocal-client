@@ -5,7 +5,8 @@ import store from './store';
 import { ApolloProvider } from 'react-apollo';
 import apolloClient from './shared/graphql/client';
 import LoadQuery from './shared/graphql/loadQuery';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Geolocator from './components/Geolocator';
 import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
@@ -28,18 +29,28 @@ class App extends React.Component {
           <LoadQuery>
             <Geolocator>
               <BrowserRouter>
-                <React.Fragment>
-                  <MenuBar />
-                  <Route path="/" component={MapScreen} />
-                  <Route path="/signal/:username" component={SignalScreen} />
-                  <Route exact path="/list" component={ListScreen} />
-                  <Route exact path="/signal" component={EditSignalScreen} />
-                  <Route path="/" component={ControlBar} />
-                  <SignInOverlay />
-                  <MenuOverlay />
-                  <CopyModalOverlay />
-                  <ErrorModalOverlay />
-                </React.Fragment>
+                <Route
+                  render={({ location }) => (
+                    <React.Fragment>
+                      <MenuBar />
+                      <Route path="/" component={MapScreen} />
+                      <TransitionGroup>
+                        <CSSTransition key={location.key} classNames="page" timeout={300}>
+                          <Switch location={location}>
+                            <Route path="/signal/:username" component={SignalScreen} />
+                            <Route exact path="/list" component={ListScreen} />
+                            <Route exact path="/signal" component={EditSignalScreen} />
+                          </Switch>
+                        </CSSTransition>
+                      </TransitionGroup>
+                      <Route path="/" component={ControlBar} />
+                      <SignInOverlay />
+                      <MenuOverlay />
+                      <CopyModalOverlay />
+                      <ErrorModalOverlay />
+                    </React.Fragment>
+                  )}
+                />
               </BrowserRouter>
             </Geolocator>
           </LoadQuery>

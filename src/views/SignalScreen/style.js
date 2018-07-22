@@ -10,6 +10,21 @@ export const Container = styled.div`
   right: 0;
   bottom: 50px;
   overflow-y: scroll;
+
+  &.page-enter {
+    opacity: 0;
+    transform: translate3d(0, 50px, 0);
+  }
+
+  &.page-enter-active {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &.page-exit {
+    opacity: 0;
+  }
 `;
 
 export const Meta = styled.div`
