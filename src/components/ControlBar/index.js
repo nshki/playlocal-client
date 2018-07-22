@@ -68,7 +68,6 @@ class ControlBar extends React.Component {
 
   render() {
     const { location, currentUser, signalPublished } = this.props;
-    if (!currentUser.username) return null;
     if (location.pathname.indexOf('/signal/') === 0) {
       return (
         <Container>
@@ -79,6 +78,7 @@ class ControlBar extends React.Component {
         </Container>
       );
     } else {
+      if (!currentUser.username) return null;
       return (
         <Container>
           {this.renderScreenIcon()}

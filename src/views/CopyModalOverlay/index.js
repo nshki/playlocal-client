@@ -23,11 +23,7 @@ class CopyModalOverlay extends React.Component {
   render() {
     const { currentUser, visible, text, onOverlayClick } = this.props;
     const { copied } = this.state;
-
-    if (!currentUser.username) {
-      return null;
-    }
-
+    if (!currentUser.username) return null;
     return (
       <Overlay onOverlayClick={onOverlayClick} visible={visible}>
         <Container onClick={this.onContainerClick}>

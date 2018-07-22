@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showCopyModalOverlay } from '../actions/overlays';
+import { showSignInOverlay, showCopyModalOverlay } from '../actions/overlays';
 import moment from 'moment';
 import haversine from 'haversine';
 import IconButton from '../components/IconButton';
@@ -33,20 +33,23 @@ export const distanceBetween = (start, end) => {
 };
 
 /**
- * Given a signal, generates the button to view the corresponding Twitter page.
- * Returns null if Twitter is not associated.
- *
- * @param {Object} signal
- * @returns {JSX | null}
+ * Functional component used for twitterButton() function.
  */
-export const twitterButton = (signal) => {
+const TwitterButton = connect(
+  (state) => ({ currentUser: state.currentUser }),
+  (dispatch) => ({ dispatch })
+)(({ signal, currentUser, dispatch }) => {
   if (!signal.twitterUsername) return null;
 
   const onClick = () => {
-    window.open(
-      `https://twitter.com/${signal.twitterUsername}`,
-      '_blank'
-    );
+    if (!currentUser.username) {
+      dispatch(showSignInOverlay(true));
+    } else {
+      window.open(
+        `https://twitter.com/${signal.twitterUsername}`,
+        '_blank'
+      );
+    }
   };
 
   return (
@@ -54,19 +57,34 @@ export const twitterButton = (signal) => {
       Contact via Twitter
     </IconButton>
   );
-};
+});
+
+/**
+ * Given a signal, generates the button to view the corresponding Twitter page.
+ * Returns null if Twitter is not associated.
+ *
+ * @param {Object} signal
+ * @returns {JSX | null}
+ */
+export const twitterButton = (signal) => (
+  <TwitterButton signal={signal} />
+);
 
 /**
  * Functional component used for discordButton() function.
  */
 const DiscordButton = connect(
-  (state) => ({}),
+  (state) => ({ currentUser: state.currentUser }),
   (dispatch) => ({ dispatch })
-)(({ signal, dispatch }) => {
+)(({ signal, currentUser, dispatch }) => {
   if (!signal.discordUsername) return null;
 
   const onClick = () => {
-    dispatch(showCopyModalOverlay(true, signal.discordUsername));
+    if (!currentUser.username) {
+      dispatch(showSignInOverlay(true));
+    } else {
+      dispatch(showCopyModalOverlay(true, signal.discordUsername));
+    }
   };
 
   return (
