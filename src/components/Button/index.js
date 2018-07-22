@@ -3,9 +3,9 @@ import { Container } from './style';
 
 class Button extends React.Component {
   render() {
-    const { onClick, children } = this.props;
+    const { onClick, action, children } = this.props;
     return (
-      <Container onClick={onClick}>
+      <Container onClick={onClick} action={action}>
         {children}
       </Container>
     );

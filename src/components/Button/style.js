@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.button`
   background-color: #444;
@@ -11,4 +11,8 @@ export const Container = styled.button`
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: #fff;
+
+  ${props => props.action && css`
+    background-color: #ff8a00;
+  `}
 `;

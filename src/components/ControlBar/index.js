@@ -4,6 +4,7 @@ import { setSearchRadius } from '../../actions/preferences';
 import ListIcon from '../ListIcon';
 import MapIcon from '../MapIcon';
 import CaretIcon from '../CaretIcon';
+import Button from '../Button';
 import {
   Container,
   IconLink,
@@ -66,8 +67,31 @@ class ControlBar extends React.Component {
     );
   };
 
+  renderAction = () => {
+    const { location, signalPublished } = this.props;
+    if (location.pathname === '/signal') {
+      if (signalPublished) {
+        return (
+          <Button>
+            Unpublish
+          </Button>
+        );
+      } else {
+        return (
+          <Button action={true}>
+            Publish
+          </Button>
+        );
+      }
+    } else {
+      return (
+        <PublishToggle published={signalPublished} />
+      );
+    }
+  };
+
   render() {
-    const { location, currentUser, signalPublished } = this.props;
+    const { location, currentUser } = this.props;
     if (location.pathname.indexOf('/signal/') === 0) {
       return (
         <Container>
@@ -83,7 +107,7 @@ class ControlBar extends React.Component {
         <Container>
           {this.renderScreenIcon()}
           {this.renderDropdown()}
-          <PublishToggle published={signalPublished} />
+          {this.renderAction()}
         </Container>
       );
     }

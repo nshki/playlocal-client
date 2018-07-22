@@ -25,6 +25,10 @@ export const Container = styled.div`
     right: 0;
     bottom: 0;
   }
+
+  button {
+    width: auto;
+  }
 `;
 
 export const IconLink = styled(Link)`
