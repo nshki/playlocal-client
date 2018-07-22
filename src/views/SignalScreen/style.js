@@ -89,4 +89,8 @@ export const Message = styled.p`
 
 export const Actions = styled.div`
   margin-top: 25px;
+
+  & > * {
+    margin: 5px 0;
+  }
 `;
