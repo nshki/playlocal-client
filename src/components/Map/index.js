@@ -52,7 +52,7 @@ class Map extends React.Component {
     // Animate the map size.
     if (short !== prevProps.short) {
       const animateResize = setInterval(() => this.resize(), 1.667);
-      setTimeout(() => clearInterval(animateResize), 300);
+      setTimeout(() => clearInterval(animateResize), 310);
     }
   }
 
