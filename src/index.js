@@ -37,7 +37,7 @@ class App extends React.Component {
                       <TransitionGroup>
                         <CSSTransition key={location.key} classNames="page" timeout={300}>
                           <Switch location={location}>
-                            <Route path="/signal/:username" component={SignalScreen} />
+                            <Route exact path="/signal/:username" component={SignalScreen} />
                             <Route exact path="/list" component={ListScreen} />
                             <Route exact path="/signal" component={EditSignalScreen} />
                           </Switch>

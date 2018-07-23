@@ -2,19 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MapGL, { Marker } from 'react-map-gl';
 import { getAvatarForCurrentUser } from '../../helpers/users';
-import { Signal } from './style';
+import { Container, Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 class Map extends React.Component {
-  state = {
-    viewport: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-      latitude: 37.785164,
-      longitude: -100,
-      zoom: 13,
-    }
-  };
+  constructor(props) {
+    super(props);
+    this.container = React.createRef();
+    this.state = {
+      viewport: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+        latitude: 37.785164,
+        longitude: -100,
+        zoom: 13,
+      },
+    };
+  }
 
   componentDidMount() {
     const { geolocation } = this.props;
@@ -22,6 +26,7 @@ class Map extends React.Component {
       this.centerOnGeolocation();
     }
     window.addEventListener('resize', this.resize);
+    this.resize();
   }
 
   componentWillUnmount() {
@@ -29,12 +34,17 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { geolocation } = this.props;
+    const { short, geolocation } = this.props;
     if (
       geolocation.lat !== null && prevProps.geolocation.lat === null &&
       geolocation.lng !== null && prevProps.geolocation.lng === null
     ) {
       this.centerOnGeolocation();
+    }
+
+    if (short !== prevProps.short) {
+      const animateResize = setInterval(() => this.resize(), 1.667);
+      setTimeout(() => clearInterval(animateResize), 300);
     }
   }
 
@@ -42,8 +52,8 @@ class Map extends React.Component {
     this.setState({
       viewport: {
         ...this.state.viewport,
-        width: window.innerWidth,
-        height: window.innerHeight,
+        width: this.container.current.clientWidth,
+        height: this.container.current.clientHeight,
       },
     });
   };
@@ -114,16 +124,19 @@ class Map extends React.Component {
   };
 
   render() {
+    const { short } = this.props;
     return (
-      <MapGL
-        {...this.state.viewport}
-        onViewportChange={this.updateViewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
-      >
-        {this._renderMe()}
-        {this._renderSignals()}
-      </MapGL>
+      <Container innerRef={this.container} short={short}>
+        <MapGL
+          {...this.state.viewport}
+          onViewportChange={this.updateViewport}
+          mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
+          mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        >
+          {this._renderMe()}
+          {this._renderSignals()}
+        </MapGL>
+      </Container>
     );
   }
 }

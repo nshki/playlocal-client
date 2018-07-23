@@ -4,9 +4,11 @@ import Map from '../../components/Map';
 
 class MapScreen extends React.Component {
   render() {
-    const { currentUser, signals, geolocation } = this.props;
+    const { location, currentUser, signals, geolocation } = this.props;
+    const short = location.pathname.indexOf('/signal') > -1;
     return (
       <Map
+        short={short}
         currentUser={currentUser}
         signals={signals}
         geolocation={geolocation}

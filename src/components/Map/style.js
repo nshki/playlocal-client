@@ -1,5 +1,17 @@
 import styled, { keyframes, css } from 'styled-components';
 
+export const Container = styled.div`
+  width: 100vw;
+  position: fixed;
+  top: 50px;
+  bottom: 50px;
+  transition: all 0.3s ease-in-out;
+
+  ${props => props.short && css`
+    bottom: 73vh;
+  `}
+`;
+
 const pulse = keyframes`
   from {
     transform: scale3d(1, 1, 1);
