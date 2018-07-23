@@ -138,10 +138,6 @@ export const DatetimeContainer = styled.div`
     border: none;
   }
 
-  .rdtPicker thead tr:first-child th:hover {
-    background-color: transparent;
-  }
-
   .rdtPicker td.rdtDisabled {
     opacity: 0.2;
   }
@@ -160,6 +156,11 @@ export const DatetimeContainer = styled.div`
     padding-top: 10px;
   }
 
+  td.rdtMonth:hover,
+  td.rdtYear:hover,
+  .rdtPicker thead tr:first-child th:hover,
+  .rdtPicker .rdtTimeToggle:hover,
+  .rdtPicker td.rdtDay:hover,
   .rdtCounter .rdtBtn:hover {
     background-color: transparent;
   }
