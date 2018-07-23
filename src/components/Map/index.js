@@ -21,10 +21,13 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    const { geolocation } = this.props;
-    if (geolocation.lat !== null && geolocation.lng !== null) {
-      this.centerOnGeolocation();
+    const { lat, lng } = this.props;
+
+    // Center on passed coordinates.
+    if (lat && lng) {
+      setTimeout(() => this.centerOnCoords({ lat, lng }), 0);
     }
+
     window.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -34,14 +37,14 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { short, geolocation } = this.props;
-    if (
-      geolocation.lat !== null && prevProps.geolocation.lat === null &&
-      geolocation.lng !== null && prevProps.geolocation.lng === null
-    ) {
-      this.centerOnGeolocation();
+    const { short, lat, lng } = this.props;
+
+    // Center on passed coordinates.
+    if (lat && lng && prevProps.lat !== lat && prevProps.lng !== lng) {
+      this.centerOnCoords({ lat, lng });
     }
 
+    // Animate the map size.
     if (short !== prevProps.short) {
       const animateResize = setInterval(() => this.resize(), 1.667);
       setTimeout(() => clearInterval(animateResize), 300);
@@ -62,12 +65,11 @@ class Map extends React.Component {
     this.setState({ viewport });
   };
 
-  centerOnGeolocation = () => {
-    const { geolocation } = this.props;
+  centerOnCoords = ({ lat, lng }) => {
     this.updateViewport({
       ...this.state.viewport,
-      latitude: geolocation.lat,
-      longitude: geolocation.lng,
+      latitude: lat,
+      longitude: lng,
     });
   };
 
@@ -124,9 +126,13 @@ class Map extends React.Component {
   };
 
   render() {
-    const { short } = this.props;
+    const { short, currentUser } = this.props;
     return (
-      <Container innerRef={this.container} short={short}>
+      <Container
+        innerRef={this.container}
+        short={short}
+        currentUser={currentUser}
+      >
         <MapGL
           {...this.state.viewport}
           onViewportChange={this.updateViewport}

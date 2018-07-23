@@ -7,6 +7,10 @@ export const Container = styled.div`
   bottom: 50px;
   transition: all 0.3s ease-in-out;
 
+  ${props => !props.currentUser.username && css`
+    bottom: 0;
+  `}
+
   ${props => props.short && css`
     bottom: 73vh;
   `}
