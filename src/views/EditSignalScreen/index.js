@@ -37,6 +37,7 @@ class EditSignalScreen extends React.Component {
     // signal, set the time to that.
     let defaultTime = new Date();
     defaultTime.setHours(defaultTime.getHours() + 1);
+    defaultTime.setMinutes(0);
     if (published && endTime) defaultTime = new Date(endTime);
 
     // Check for geolocation permissions.
@@ -85,6 +86,7 @@ class EditSignalScreen extends React.Component {
             <Datetime
               defaultValue={defaultTime}
               inputProps={{ readOnly: true }}
+              timeConstraints={{ hours: { step: 1 }, minutes: { step: 5 } }}
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
               onChange={(dt) => {
