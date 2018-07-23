@@ -12,25 +12,21 @@ export const Container = styled.div`
   overflow-y: scroll;
 
   &.page-enter {
-    opacity: 0;
-    transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 100%, 0);
   }
 
   &.page-enter-active {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
     transition: all 0.3s ease-in-out;
   }
 
   &.page-exit {
-    opacity: 1;
     transform: translate3d(0, 0, 0);
     transition: all 0.3s ease-in-out;
   }
 
   &.page-exit-active {
-    opacity: 0;
-    transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 100%, 0);
   }
 `;
 
