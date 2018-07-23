@@ -160,7 +160,7 @@ export const DatetimeContainer = styled.div`
   td.rdtYear:hover,
   .rdtPicker thead tr:first-child th:hover,
   .rdtPicker .rdtTimeToggle:hover,
-  .rdtPicker td.rdtDay:hover,
+  .rdtPicker td.rdtDay:hover:not(.rdtActive),
   .rdtCounter .rdtBtn:hover {
     background-color: transparent;
   }
