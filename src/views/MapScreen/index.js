@@ -7,19 +7,32 @@ class MapScreen extends React.Component {
     const { location, currentUser, signals, geolocation } = this.props;
     const short = location.pathname.indexOf('/signal') > -1;
 
-    // Set a center coordinate based on page.
+    // Set a center coordinate.
     let lat = null;
     let lng = null;
+    let interpolate = false;
     if (location.pathname.indexOf('/signal/') === 0) {
       const username = decodeURI(window.location.href.split('/signal/')[1]);
       const signal = signals.find((s) => s.username === username);
       if (signal) {
         lat = signal.lat;
         lng = signal.lng;
+        interpolate = true;
       }
-    } else if (geolocation.lat && geolocation.lng) {
-      lat = geolocation.lat;
-      lng = geolocation.lng;
+    } else if (location.pathname.indexOf('/signal') === 0) {
+      if (
+        currentUser.signalPublished &&
+        currentUser.signalLat &&
+        currentUser.signalLng
+      ) {
+        lat = currentUser.signalLat;
+        lng = currentUser.signalLng;
+        interpolate = true;
+      } else if (geolocation.lat && geolocation.lng) {
+        lat = geolocation.lat;
+        lng = geolocation.lng;
+        interpolate = true;
+      }
     }
 
     return (
@@ -30,6 +43,7 @@ class MapScreen extends React.Component {
         geolocation={geolocation}
         lat={lat}
         lng={lng}
+        interpolate={interpolate}
       />
     );
   }

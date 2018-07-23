@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MapGL, { Marker } from 'react-map-gl';
+import MapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
 import { getAvatarForCurrentUser } from '../../helpers/users';
 import { Container, Signal } from './style';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -37,11 +37,16 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { short, lat, lng } = this.props;
+    const { short, lat, lng, geolocation } = this.props;
 
-    // Center on passed coordinates.
+    // Center on passed coordinates or geolocation coords when they first load.
     if (lat && lng && prevProps.lat !== lat && prevProps.lng !== lng) {
       this.centerOnCoords({ lat, lng });
+    } else if (
+      geolocation.lat && prevProps.geolocation.lat === null &&
+      geolocation.lng && prevProps.geolocation.lng === null
+    ) {
+      this.centerOnCoords({ lat: geolocation.lat, lng: geolocation.lng });
     }
 
     // Animate the map size.
@@ -70,6 +75,7 @@ class Map extends React.Component {
       ...this.state.viewport,
       latitude: lat,
       longitude: lng,
+      zoom: 13,
     });
   };
 
@@ -126,18 +132,21 @@ class Map extends React.Component {
   };
 
   render() {
-    const { short, currentUser } = this.props;
+    const { short, currentUser, interpolate } = this.props;
+    const transitionDuration = interpolate ? 1000 : 0;
     return (
       <Container
         innerRef={this.container}
         short={short}
-        currentUser={currentUser}
+        signedIn={!!currentUser.username}
       >
         <MapGL
           {...this.state.viewport}
           onViewportChange={this.updateViewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
           mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+          transitionDuration={transitionDuration}
+          transitionInterpolator={new FlyToInterpolator()}
         >
           {this._renderMe()}
           {this._renderSignals()}
