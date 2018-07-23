@@ -2,17 +2,17 @@ import styled, { keyframes, css } from 'styled-components';
 
 export const Container = styled.div`
   width: 100vw;
+  height: calc(100vh - 100px);
   position: fixed;
   top: 50px;
-  bottom: 50px;
   transition: all 0.3s ease-in-out;
 
   ${props => !props.signedIn && css`
-    bottom: 0;
+    height: calc(100vh - 50px);
   `}
 
   ${props => props.short && css`
-    bottom: 73vh;
+    height: calc(27vh - 50px);
   `}
 `;
 
