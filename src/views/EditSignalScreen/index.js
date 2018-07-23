@@ -84,6 +84,7 @@ class EditSignalScreen extends React.Component {
           <DatetimeContainer>
             <Datetime
               defaultValue={defaultTime}
+              inputProps={{ readOnly: true }}
               onFocus={() => this.setState({ pickerOpen: true })}
               onBlur={() => this.setState({ pickerOpen: false })}
               onChange={(dt) => {

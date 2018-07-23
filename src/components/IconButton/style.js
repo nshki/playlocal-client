@@ -10,6 +10,7 @@ export const Container = styled.button`
   align-items: center;
   padding-right: 9px;
   border-radius: 3px;
+  cursor: pointer;
 
   ${props => props.type === 'twitter' && css`
     background-color: #15c4c4;
