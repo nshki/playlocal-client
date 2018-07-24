@@ -20,11 +20,17 @@ class EditProfileScreen extends React.Component {
     const { currentUser } = props;
     this.state = {
       username: currentUser.username,
+      avatarPlatform: currentUser.avatarPlatform,
     };
   }
 
+  handlePlatformChange = (e) => {
+    this.setState({ avatarPlatform: e.target.value });
+  };
+
   render() {
-    const { username } = this.state;
+    const { currentUser: { twitterUsername, discordUsername } } = this.props;
+    const { username, avatarPlatform } = this.state;
 
     return (
       <Container>
@@ -40,19 +46,33 @@ class EditProfileScreen extends React.Component {
             />
           </FieldContainer>
 
-          <FieldContainer>
-            <FieldLabel>Avatar Source</FieldLabel>
-            <RadioGroup>
-              <RadioButton>
-                <input type="radio" name="avatar-source" value="twitter" />
-                <RadioButtonText>Twitter</RadioButtonText>
-              </RadioButton>
-              <RadioButton>
-                <input type="radio" name="avatar-source" value="discord" />
-                <RadioButtonText>Discord</RadioButtonText>
-              </RadioButton>
-            </RadioGroup>
-          </FieldContainer>
+          {twitterUsername && discordUsername &&
+            <FieldContainer>
+              <FieldLabel>Avatar Source</FieldLabel>
+              <RadioGroup>
+                <RadioButton>
+                  <input
+                    type="radio"
+                    name="avatar-source"
+                    value="twitter"
+                    defaultChecked={'twitter' === avatarPlatform}
+                    onChange={this.handlePlatformChange}
+                  />
+                  <RadioButtonText>Twitter</RadioButtonText>
+                </RadioButton>
+                <RadioButton>
+                  <input
+                    type="radio"
+                    name="avatar-source"
+                    value="discord"
+                    defaultChecked={'discord' === avatarPlatform}
+                    onChange={this.handlePlatformChange}
+                  />
+                  <RadioButtonText>Discord</RadioButtonText>
+                </RadioButton>
+              </RadioGroup>
+            </FieldContainer>
+          }
 
           <FieldContainer>
             <Button isAction={true}>Update Profile</Button>
@@ -64,13 +84,15 @@ class EditProfileScreen extends React.Component {
 
           <FieldContainer>
             <IconButton type="twitter" tall>
-              Connect Twitter account
+              {twitterUsername && `Disconnect from ${twitterUsername}`}
+              {!twitterUsername && 'Connect Twitter account'}
             </IconButton>
           </FieldContainer>
 
           <FieldContainer>
             <IconButton type="discord" tall>
-              Connect Discord account
+              {discordUsername && `Disconnect from ${discordUsername}`}
+              {!discordUsername && 'Connect Discord account'}
             </IconButton>
           </FieldContainer>
         </Section>

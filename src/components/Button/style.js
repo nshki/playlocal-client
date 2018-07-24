@@ -10,6 +10,7 @@ export const Container = styled.button`
   font-size: 0.875rem;
   text-align: center;
   text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
   letter-spacing: 0.1em;
   color: #fff;
 
