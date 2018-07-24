@@ -1,14 +1,28 @@
 import React from 'react';
-import { Container } from './style';
+import { Container, RouteContainer } from './style';
 
 class Button extends React.Component {
   render() {
-    const { onClick, isAction, children } = this.props;
-    return (
-      <Container onClick={onClick} isAction={isAction}>
-        {children}
-      </Container>
-    );
+    const {
+      onClick,
+      isAction,
+      children,
+      to,
+    } = this.props;
+
+    if (to) {
+      return (
+        <RouteContainer to={to}>
+          {children}
+        </RouteContainer>
+      );
+    } else {
+      return (
+        <Container onClick={onClick} isAction={isAction}>
+          {children}
+        </Container>
+      );
+    }
   }
 }
 

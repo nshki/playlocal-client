@@ -8,4 +8,8 @@ export const Container = styled.div`
   padding: 15px;
   width: 100%;
   max-width: 325px;
+
+  & > * {
+    margin: 5px 0;
+  }
 `;

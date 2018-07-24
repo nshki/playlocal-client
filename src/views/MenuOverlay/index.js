@@ -17,6 +17,7 @@ class MenuOverlay extends React.Component {
     return (
       <Overlay onOverlayClick={onOverlayClick} visible={visible}>
         <Container>
+          <Button to="/profile">Edit Profile</Button>
           <Button onClick={onSignOutClick}>Sign out</Button>
         </Container>
       </Overlay>

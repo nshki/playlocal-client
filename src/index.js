@@ -12,6 +12,7 @@ import MenuBar from './components/MenuBar';
 import MapScreen from './views/MapScreen';
 import SignalScreen from './views/SignalScreen';
 import EditSignalScreen from './views/EditSignalScreen';
+import EditProfileScreen from './views/EditProfileScreen';
 import ListScreen from './views/ListScreen';
 import ControlBar from './components/ControlBar';
 import SignInOverlay from './views/SignInOverlay';
@@ -40,6 +41,7 @@ class App extends React.Component {
                             <Route exact path="/signal/:username" component={SignalScreen} />
                             <Route exact path="/list" component={ListScreen} />
                             <Route exact path="/signal" component={EditSignalScreen} />
+                            <Route exact path="/profile" component={EditProfileScreen} />
                           </Switch>
                         </CSSTransition>
                       </TransitionGroup>

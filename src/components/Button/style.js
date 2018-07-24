@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.button`
   background-color: #444;
@@ -16,3 +17,5 @@ export const Container = styled.button`
     background-color: #ff8a00;
   `}
 `;
+
+export const RouteContainer = Container.withComponent(Link);

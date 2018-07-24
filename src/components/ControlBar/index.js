@@ -83,7 +83,10 @@ class ControlBar extends React.Component {
 
   render() {
     const { location, currentUser } = this.props;
-    if (location.pathname.indexOf('/signal/') === 0) {
+    if (
+      location.pathname.indexOf('/signal/') === 0 ||
+      location.pathname.indexOf('/profile') === 0
+    ) {
       return (
         <Container>
           <BackButton to="/">
