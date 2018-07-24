@@ -77,7 +77,6 @@ export const RadioButton = styled.label`
 export const RadioButtonText = styled.p`
   padding: 10px 11px;
   text-align: center;
-  font-family: 700;
   font-size: 0.875rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
