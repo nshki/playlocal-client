@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Button from '../../components/Button';
 import Title from '../../components/Title';
 import FieldContainer from '../../components/FieldContainer';
 import FieldLabel from '../../components/FieldLabel';
@@ -51,6 +52,10 @@ class EditProfileScreen extends React.Component {
                 <RadioButtonText>Discord</RadioButtonText>
               </RadioButton>
             </RadioGroup>
+          </FieldContainer>
+
+          <FieldContainer>
+            <Button isAction={true}>Update Profile</Button>
           </FieldContainer>
         </Section>
 
