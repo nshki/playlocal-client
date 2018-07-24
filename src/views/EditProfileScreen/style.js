@@ -33,6 +33,12 @@ export const Container = styled.div`
   }
 `;
 
+export const Section = styled.div`
+  & + & {
+    margin-top: 40px;
+  }
+`;
+
 export const TextInput = styled.input`
   background-color: transparent;
   width: 100%;
@@ -42,4 +48,44 @@ export const TextInput = styled.input`
   font-size: 1.125rem;
   letter-spacing: 0.01em;
   color: #fff;
+`;
+
+export const RadioGroup = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const RadioButton = styled.label`
+  flex-grow: 1;
+  display: block;
+  overflow: hidden;
+
+  &:first-of-type {
+    border-bottom-left-radius: 3px;
+  }
+
+  &:last-of-type {
+    border-bottom-right-radius: 3px;
+  }
+
+  [type="radio"] {
+    display: none;
+  }
+`;
+
+export const RadioButtonText = styled.p`
+  padding: 10px 11px;
+  text-align: center;
+  font-family: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+
+  [type="radio"]:checked + & {
+    background-color: #ff8a00;
+  }
 `;
