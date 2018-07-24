@@ -32,6 +32,7 @@ export const Signal = styled.div`
   width: 23px;
   height: 23px;
   position: relative;
+  transform: translate(-50%, -50%);
 
   a {
     background-color: #ff8a00;
