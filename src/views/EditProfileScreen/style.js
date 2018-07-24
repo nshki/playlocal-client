@@ -86,6 +86,6 @@ export const RadioButtonText = styled.p`
   transition: all 0.2s ease-in-out;
 
   [type="radio"]:checked + & {
-    background-color: #ff8a00;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 `;
