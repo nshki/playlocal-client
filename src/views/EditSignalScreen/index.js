@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import Datetime from 'react-datetime';
 import { updateSignal } from '../../actions/currentUser';
+import Title from '../../components/Title';
+import FieldContainer from '../../components/FieldContainer';
+import FieldLabel from '../../components/FieldLabel';
 import MessageIcon from '../../components/MessageIcon';
 import ClockIcon from '../../components/ClockIcon';
-import {
-  Container,
-  Title,
-  FieldContainer,
-  FieldLabel,
-  TextArea,
-  DatetimeContainer,
-} from './style';
+import { Container, TextArea, DatetimeContainer } from './style';
 import 'react-datetime/css/react-datetime.css';
 
 class EditSignalScreen extends React.Component {
