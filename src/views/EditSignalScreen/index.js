@@ -37,7 +37,7 @@ class EditSignalScreen extends React.Component {
     if (published && endTime) defaultTime = new Date(endTime);
 
     // Check for geolocation permissions.
-    if (!navigator || !navigator.permissions) {
+    if ((!navigator || !navigator.permissions) && geolocationEnabled) {
       this.setState({ geolocationEnabled: false });
     } else {
       navigator.permissions && navigator.permissions.query({
