@@ -44,3 +44,24 @@ export const updateSignal = (published, message, endTime, lat, lng) => {
     lng,
   };
 };
+
+/**
+ * Updates current user's identities.
+ *
+ * @param {String} avatarPlatform
+ * @param {String} twitterUsername
+ * @param {String} twitterImageUrl
+ * @param {String} discordUsername
+ * @param {String} discordImageUrl
+ * @returns {Object}
+ */
+export const updateIdentities = (avatarPlatform, twitterUsername, twitterImageUrl, discordUsername, discordImageUrl) => {
+  return {
+    type: 'UPDATE_CURRENT_USER_IDENTITIES',
+    avatarPlatform,
+    twitterUsername,
+    twitterImageUrl,
+    discordUsername,
+    discordImageUrl,
+  };
+};

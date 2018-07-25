@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import { getFromStorage } from '../../helpers/localStorage';
 import UpdateProfileButton from '../../shared/graphql/updateProfileMutation';
+import DisconnectAccountButton from '../../shared/graphql/disconnectAccountMutation';
 import Title from '../../components/Title';
 import FieldContainer from '../../components/FieldContainer';
 import FieldLabel from '../../components/FieldLabel';
@@ -45,6 +46,36 @@ class EditProfileScreen extends React.Component {
     const token = getFromStorage('token');
     if (!discordUsername && token) {
       window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord?token=${token}`;
+    }
+  };
+
+  renderTwitterButton = () => {
+    const { currentUser: { twitterUsername } } = this.props;
+    if (twitterUsername) {
+      return (
+        <DisconnectAccountButton type="twitter" username={twitterUsername} />
+      );
+    } else {
+      return (
+        <IconButton onClick={this.handleTwitterClick} type="twitter" tall>
+          Connect Twitter account
+        </IconButton>
+      );
+    }
+  };
+
+  renderDiscordButton = () => {
+    const { currentUser: { discordUsername } } = this.props;
+    if (discordUsername) {
+      return (
+        <DisconnectAccountButton type="discord" username={discordUsername} />
+      );
+    } else {
+      return (
+        <IconButton onClick={this.handleDiscordClick} type="discord" tall>
+          Connect Discord account
+        </IconButton>
+      );
     }
   };
 
@@ -115,17 +146,11 @@ class EditProfileScreen extends React.Component {
           <Title>Connected Accounts</Title>
 
           <FieldContainer>
-            <IconButton onClick={this.handleTwitterClick} type="twitter" tall>
-              {twitterUsername && `Disconnect from ${twitterUsername}`}
-              {!twitterUsername && 'Connect Twitter account'}
-            </IconButton>
+            {this.renderTwitterButton()}
           </FieldContainer>
 
           <FieldContainer>
-            <IconButton onClick={this.handleDiscordClick} type="discord" tall>
-              {discordUsername && `Disconnect from ${discordUsername}`}
-              {!discordUsername && 'Connect Discord account'}
-            </IconButton>
+            {this.renderDiscordButton()}
           </FieldContainer>
         </Section>
       </Container>

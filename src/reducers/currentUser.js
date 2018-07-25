@@ -57,6 +57,15 @@ export default function currentUser(state = initialState, action) {
         username: action.username,
         avatarPlatform: action.avatarPlatform,
       };
+    case 'UPDATE_CURRENT_USER_IDENTITIES':
+      return {
+        ...state,
+        avatarPlatform: action.avatarPlatform,
+        twitterUsername: action.twitterUsername,
+        twitterImageUrl: action.twitterImageUrl,
+        discordUsername: action.discordUsername,
+        discordImageUrl: action.discordImageUrl,
+      };
     case 'CLEAR_CURRENT_USER':
       removeFromStorage('token');
       return initialState;
