@@ -13,6 +13,7 @@ export const Container = styled.button`
   text-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
   letter-spacing: 0.1em;
   color: #fff;
+  cursor: pointer;
 
   ${props => props.isAction && css`
     background-color: #ff8a00;
