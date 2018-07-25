@@ -73,6 +73,7 @@ class DisconnectAccountButton extends React.Component {
         {(disconnectAccountMutation, { data }) => {
           return (
             <IconButton
+              tall
               type={type}
               onClick={() => {
                 disconnectAccountMutation({
