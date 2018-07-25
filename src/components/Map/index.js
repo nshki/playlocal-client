@@ -29,11 +29,17 @@ class Map extends React.Component {
     }
 
     window.addEventListener('resize', this.resize);
+    window.addEventListener('native.showkeyboard', this.resize);
+    window.addEventListener('native.hidekeyboard', this.resize);
+    window.addEventListener('orientationchange', this.resize);
     this.resize();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
+    window.removeEventListener('native.showkeyboard', this.resize);
+    window.removeEventListener('native.hidekeyboard', this.resize);
+    window.removeEventListener('orientationchange', this.resize);
   }
 
   componentDidUpdate(prevProps) {
