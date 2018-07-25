@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
+import { getFromStorage } from '../../helpers/localStorage';
 import UpdateProfileButton from '../../shared/graphql/updateProfileMutation';
 import Title from '../../components/Title';
 import FieldContainer from '../../components/FieldContainer';
@@ -16,14 +17,10 @@ import {
 } from './style';
 
 class EditProfileScreen extends React.Component {
-  state = { username: '', avatarPlatform: '' };
-
-  componentDidMount() {
-    const { currentUser } = this.props;
-    this.setState({
-      username: currentUser.username,
-      avatarPlatform: currentUser.avatarPlatform,
-    });
+  constructor(props) {
+    super(props);
+    const { currentUser: { username, avatarPlatform } } = this.props;
+    this.state = { username, avatarPlatform };
   }
 
   handleUsernameChange = (e) => {
@@ -37,15 +34,17 @@ class EditProfileScreen extends React.Component {
 
   handleTwitterClick = () => {
     const { currentUser: { twitterUsername } } = this.props;
-    if (!twitterUsername) {
-      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/twitter`;
+    const token = getFromStorage('token');
+    if (!twitterUsername && token) {
+      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/twitter?token=${token}`;
     }
   };
 
   handleDiscordClick = () => {
     const { currentUser: { discordUsername } } = this.props;
-    if (!discordUsername) {
-      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord`;
+    const token = getFromStorage('token');
+    if (!discordUsername && token) {
+      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord?token=${token}`;
     }
   };
 
