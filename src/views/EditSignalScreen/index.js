@@ -14,6 +14,23 @@ import 'react-datetime/css/react-datetime.css';
 class EditSignalScreen extends React.Component {
   state = { geolocationEnabled: true, pickerOpen: false };
 
+  componentDidMount() {
+    const { geolocationEnabled } = this.state;
+
+    // Check for geolocation permissions.
+    if ((!navigator || !navigator.permissions) && geolocationEnabled) {
+      setTimeout(() => this.setState({ geolocationEnabled: false }), 0);
+    } else {
+      navigator.permissions && navigator.permissions.query({
+        name: 'geolocation',
+      }).then((status) => {
+        if (status.state !== 'granted') {
+          setTimeout(() => this.setState({ geolocationEnabled: false }), 0);
+        }
+      });
+    }
+  }
+
   render() {
     const {
       currentUser,
@@ -35,19 +52,6 @@ class EditSignalScreen extends React.Component {
     defaultTime.setHours(defaultTime.getHours() + 1);
     defaultTime.setMinutes(0);
     if (published && endTime) defaultTime = new Date(endTime);
-
-    // Check for geolocation permissions.
-    if ((!navigator || !navigator.permissions) && geolocationEnabled) {
-      this.setState({ geolocationEnabled: false });
-    } else {
-      navigator.permissions && navigator.permissions.query({
-        name: 'geolocation',
-      }).then((status) => {
-        if (status.state !== 'granted') {
-          this.setState({ geolocationEnabled: false });
-        }
-      });
-    }
 
     return (
       <Container>
