@@ -12,6 +12,16 @@ export const Container = styled.div`
     height: 100vh;
     left: 360px;
     top: 0;
+
+    &:after {
+      content: '';
+      width: 360px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+    }
   }
 
   ${props => !props.signedIn && css`
