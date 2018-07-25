@@ -101,7 +101,11 @@ class LoadQuery extends React.Component {
     const { onLoad, children } = this.props;
 
     return (
-      <Query query={LOAD_QUERY} context={authContext()}>
+      <Query
+        query={LOAD_QUERY}
+        context={authContext()}
+        pollInterval={10000}
+      >
         {({ loading, error, data }) => {
           if (loading || error) {
             if (error) console.error(error.message);
