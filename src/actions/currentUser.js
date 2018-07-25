@@ -1,4 +1,19 @@
 /**
+ * Updates current user's information.
+ *
+ * @param {String} username
+ * @param {String} avatarPlatform
+ * @returns {Object}
+ */
+export const updateProfile = (username, avatarPlatform) => {
+  return {
+    type: 'UPDATE_CURRENT_USER',
+    username,
+    avatarPlatform,
+  };
+};
+
+/**
  * Removes current user's information.
  *
  * @returns {Object}

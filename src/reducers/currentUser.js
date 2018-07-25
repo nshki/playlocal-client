@@ -51,6 +51,12 @@ export default function currentUser(state = initialState, action) {
         signalLat: lat,
         signalLng: lng,
       };
+    case 'UPDATE_CURRENT_USER':
+      return {
+        ...state,
+        username: action.username,
+        avatarPlatform: action.avatarPlatform,
+      };
     case 'CLEAR_CURRENT_USER':
       removeFromStorage('token');
       return initialState;

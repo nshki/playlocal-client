@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '../../components/Button';
+import UpdateProfileButton from '../../shared/graphql/updateProfileMutation';
 import Title from '../../components/Title';
 import FieldContainer from '../../components/FieldContainer';
 import FieldLabel from '../../components/FieldLabel';
@@ -15,14 +15,20 @@ import {
 } from './style';
 
 class EditProfileScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    const { currentUser } = props;
-    this.state = {
+  state = { username: '', avatarPlatform: '' };
+
+  componentDidMount() {
+    const { currentUser } = this.props;
+    this.setState({
       username: currentUser.username,
       avatarPlatform: currentUser.avatarPlatform,
-    };
+    });
   }
+
+  handleUsernameChange = (e) => {
+    e.preventDefault();
+    this.setState({ username: e.target.value });
+  };
 
   handlePlatformChange = (e) => {
     this.setState({ avatarPlatform: e.target.value });
@@ -42,7 +48,7 @@ class EditProfileScreen extends React.Component {
             <TextInput
               defaultValue={username}
               placeholder=":("
-              onChange={(e) => this.setState({ username: e.target.value })}
+              onChange={this.handleUsernameChange}
             />
           </FieldContainer>
 
@@ -75,7 +81,10 @@ class EditProfileScreen extends React.Component {
           }
 
           <FieldContainer>
-            <Button isAction={true}>Update Profile</Button>
+            <UpdateProfileButton
+              username={username}
+              avatarPlatform={avatarPlatform}
+            />
           </FieldContainer>
         </Section>
 

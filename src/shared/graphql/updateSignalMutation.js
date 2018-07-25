@@ -48,7 +48,6 @@ class UpdateSignalButton extends React.Component {
         }}
       >
         {(updateSignalMutation, { data }) => {
-
           return (
             <Button
               isAction={!published}
