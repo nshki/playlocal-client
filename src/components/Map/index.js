@@ -29,17 +29,13 @@ class Map extends React.Component {
     }
 
     window.addEventListener('resize', this.resize);
-    window.addEventListener('native.showkeyboard', this.resize);
-    window.addEventListener('native.hidekeyboard', this.resize);
-    window.addEventListener('orientationchange', this.resize);
+    this.resizeInterval = setInterval(this.resize, 1000);
     this.resize();
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize);
-    window.removeEventListener('native.showkeyboard', this.resize);
-    window.removeEventListener('native.hidekeyboard', this.resize);
-    window.removeEventListener('orientationchange', this.resize);
+    if (this.resizeInterval) clearInterval(this.resizeInterval);
   }
 
   componentDidUpdate(prevProps) {
