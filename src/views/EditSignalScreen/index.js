@@ -12,20 +12,16 @@ import { Container, TextArea, DatetimeContainer } from './style';
 import 'react-datetime/css/react-datetime.css';
 
 class EditSignalScreen extends React.Component {
-  state = { geolocationEnabled: true, pickerOpen: false };
+  state = { geolocationEnabled: false, pickerOpen: false };
 
   componentDidMount() {
     const { geolocationEnabled } = this.state;
 
     // Check for geolocation permissions.
-    if ((!navigator || !navigator.permissions) && geolocationEnabled) {
-      setTimeout(() => this.setState({ geolocationEnabled: false }), 0);
-    } else {
-      navigator.permissions && navigator.permissions.query({
-        name: 'geolocation',
-      }).then((status) => {
-        if (status.state !== 'granted') {
-          setTimeout(() => this.setState({ geolocationEnabled: false }), 0);
+    if (navigator && navigator.permissions && !geolocationEnabled) {
+      navigator.permissions.query({ name: 'geolocation' }).then((status) => {
+        if (status.state === 'granted') {
+          setTimeout(() => this.setState({ geolocationEnabled: true }), 0);
         }
       });
     }
