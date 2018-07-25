@@ -11,6 +11,12 @@ export const Container = styled.div`
   bottom: 50px;
   overflow-y: scroll;
 
+  @media (min-width: 768px) {
+    width: 360px;
+    top: 50px;
+    right: auto;
+  }
+
   &.page-enter {
     transform: translate3d(0, 100%, 0);
   }
@@ -37,7 +43,9 @@ export const Avatar = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  min-width: 100px;
   width: 100px;
+  min-height: 100px;
   height: 100px;
   margin-right: 15px;
   border: 3px solid #fff;

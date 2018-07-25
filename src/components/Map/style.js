@@ -7,12 +7,27 @@ export const Container = styled.div`
   top: 50px;
   transition: all 0.3s ease-in-out;
 
+  @media (min-width: 768px) {
+    width: calc(100vw - 360px);
+    height: 100vh;
+    left: 360px;
+    top: 0;
+  }
+
   ${props => !props.signedIn && css`
     height: calc(100vh - 50px);
+
+    @media (min-width: 768px) {
+      height: 100vh;
+    }
   `}
 
   ${props => props.short && css`
     height: calc(27vh - 50px);
+
+    @media (min-width: 768px) {
+      height: 100vh;
+    }
   `}
 `;
 

@@ -10,6 +10,11 @@ export const Container = styled.div`
   bottom: 50px;
   overflow-y: scroll;
 
+  @media (min-width: 768px) {
+    width: 360px;
+    right: auto;
+  }
+
   &.page-enter {
     opacity: 0;
     transform: translate3d(0, 50px, 0);

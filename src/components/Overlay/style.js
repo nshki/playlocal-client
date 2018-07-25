@@ -16,6 +16,10 @@ export const Container = styled.div`
   pointer-events: none;
   transition: all 0.2s ease-in-out;
 
+  @media (min-width: 768px) {
+    top: 0;
+  }
+
   ${props => props.visible && css`
     opacity: 1;
     pointer-events: all;

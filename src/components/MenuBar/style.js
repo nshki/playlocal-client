@@ -14,6 +14,11 @@ export const Container = styled.header`
   left: 0;
   right: 0;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+  @media (min-width: 768px) {
+    width: 360px;
+    right: auto;
+  }
 `;
 
 export const Logo = styled.h1`

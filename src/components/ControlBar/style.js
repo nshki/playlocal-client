@@ -15,6 +15,11 @@ export const Container = styled.div`
   left: 0;
   right: 0;
 
+  @media (min-width: 768px) {
+    width: 360px;
+    right: auto;
+  }
+
   &:before {
     content: '';
     background-color: #1d1d1d;
