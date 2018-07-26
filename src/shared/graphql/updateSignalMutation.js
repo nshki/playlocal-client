@@ -47,20 +47,23 @@ class UpdateSignalButton extends React.Component {
           }
         }}
       >
-        {(updateSignalMutation, { data }) => {
+        {(updateSignalMutation, { loading, data }) => {
           return (
             <Button
+              disabled={loading}
               isAction={!published}
               onClick={() => {
-                updateSignalMutation({
-                  variables: {
-                    message,
-                    endTime,
-                    lat,
-                    lng,
-                    published: !published,
-                  },
-                });
+                if (!loading) {
+                  updateSignalMutation({
+                    variables: {
+                      message,
+                      endTime,
+                      lat,
+                      lng,
+                      published: !published,
+                    },
+                  });
+                }
               }}
             >
               {buttonText}

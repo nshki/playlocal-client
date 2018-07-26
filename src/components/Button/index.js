@@ -8,6 +8,7 @@ class Button extends React.Component {
       isAction,
       children,
       to,
+      disabled,
     } = this.props;
 
     if (to) {
@@ -18,7 +19,7 @@ class Button extends React.Component {
       );
     } else {
       return (
-        <Container onClick={onClick} isAction={isAction}>
+        <Container onClick={onClick} isAction={isAction} disabled={disabled}>
           {children}
         </Container>
       );

@@ -15,6 +15,11 @@ export const Container = styled.button`
   color: #fff;
   cursor: pointer;
 
+  &[disabled] {
+    opacity: 0.5;
+    cursor: wait;
+  }
+
   ${props => props.isAction && css`
     background-color: #ff8a00;
   `}
