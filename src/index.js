@@ -27,35 +27,34 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <ApolloProvider client={apolloClient}>
-          <LoadQuery>
-            <Geolocator>
-              <BrowserRouter>
-                <Route
-                  render={({ location }) => (
-                    <React.Fragment>
-                      <MenuBar />
-                      <Route path="/" component={MapScreen} />
-                      <TransitionGroup>
-                        <CSSTransition key={location.key} classNames="page" timeout={300}>
-                          <Switch location={location}>
-                            <Route exact path="/signal/:username" component={SignalScreen} />
-                            <Route exact path="/list" component={ListScreen} />
-                            <Route exact path="/signal" component={EditSignalScreen} />
-                            <Route exact path="/profile" component={EditProfileScreen} />
-                          </Switch>
-                        </CSSTransition>
-                      </TransitionGroup>
-                      <Route path="/" component={ControlBar} />
-                      <SignInOverlay />
-                      <MenuOverlay />
-                      <CopyModalOverlay />
-                      <ErrorModalOverlay />
-                    </React.Fragment>
-                  )}
-                />
-              </BrowserRouter>
-            </Geolocator>
-          </LoadQuery>
+          <LoadQuery />
+          <Geolocator>
+            <BrowserRouter>
+              <Route
+                render={({ location }) => (
+                  <React.Fragment>
+                    <MenuBar />
+                    <Route path="/" component={MapScreen} />
+                    <TransitionGroup>
+                      <CSSTransition key={location.key} classNames="page" timeout={300}>
+                        <Switch location={location}>
+                          <Route exact path="/signal/:username" component={SignalScreen} />
+                          <Route exact path="/list" component={ListScreen} />
+                          <Route exact path="/signal" component={EditSignalScreen} />
+                          <Route exact path="/profile" component={EditProfileScreen} />
+                        </Switch>
+                      </CSSTransition>
+                    </TransitionGroup>
+                    <Route path="/" component={ControlBar} />
+                    <SignInOverlay />
+                    <MenuOverlay />
+                    <CopyModalOverlay />
+                    <ErrorModalOverlay />
+                  </React.Fragment>
+                )}
+              />
+            </BrowserRouter>
+          </Geolocator>
         </ApolloProvider>
       </Provider>
     );
