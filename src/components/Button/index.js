@@ -19,7 +19,14 @@ class Button extends React.Component {
       );
     } else {
       return (
-        <Container onClick={onClick} isAction={isAction} disabled={disabled}>
+        <Container
+          onClick={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+          isAction={isAction}
+          disabled={disabled}
+        >
           {children}
         </Container>
       );
