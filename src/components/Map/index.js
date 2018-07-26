@@ -14,8 +14,8 @@ class Map extends React.Component {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        latitude: geolocation ? geolocation.lat : 37.785164,
-        longitude: geolocation ? geolocation.lng : -100,
+        latitude: geolocation.lat ? geolocation.lat : 37.785164,
+        longitude: geolocation.lng ? geolocation.lng : -100,
         zoom: 13,
       },
     };
