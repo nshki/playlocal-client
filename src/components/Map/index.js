@@ -8,13 +8,14 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    const { geolocation } = props;
     this.container = React.createRef();
     this.state = {
       viewport: {
         width: window.innerWidth,
         height: window.innerHeight,
-        latitude: 37.785164,
-        longitude: -100,
+        latitude: geolocation ? geolocation.lat : 37.785164,
+        longitude: geolocation ? geolocation.lng : -100,
         zoom: 13,
       },
     };

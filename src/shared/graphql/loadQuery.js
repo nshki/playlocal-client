@@ -116,7 +116,7 @@ class LoadQuery extends React.Component {
             );
           }
 
-          onLoad(data, geolocation, preferences);
+          setTimeout(() => onLoad(data, geolocation, preferences), 0);
           return children;
         }}
       </Query>
