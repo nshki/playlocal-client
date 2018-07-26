@@ -40,17 +40,20 @@ class UpdateProfileButton extends React.Component {
           }
         }}
       >
-        {(updateProfileMutation, { data }) => {
+        {(updateProfileMutation, { loading, data }) => {
           return (
             <Button
+              disabled={loading}
               isAction={true}
               onClick={() => {
-                updateProfileMutation({
-                  variables: {
-                    username,
-                    avatarPlatform,
-                  },
-                });
+                if (!loading) {
+                  updateProfileMutation({
+                    variables: {
+                      username,
+                      avatarPlatform,
+                    },
+                  });
+                }
               }}
             >
               {updated && 'Updated!'}
