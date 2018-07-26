@@ -93,6 +93,7 @@ export const DropdownItem = styled.button`
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
 
   ${DropdownItems} > & {
     width: 100%;
