@@ -19,27 +19,40 @@ export default function currentUser(state = initialState, action) {
     case 'UPDATE_APP_DATA':
       if (!action.data.currentUser) return state;
 
-      const {
-        username,
-        avatarPlatform,
-        identities,
-        playSignal,
-      } = action.data.currentUser;
+      const { currentUser } = action.data;
+      const { identities, playSignal } = currentUser;
       const twitterIdentity = identities.find(i => i.provider === 'twitter');
       const discordIdentity = identities.find(i => i.provider === 'discord');
+      let twitterUsername = twitterIdentity ? twitterIdentity.username : null;
+      let twitterImageUrl = twitterIdentity ? twitterIdentity.imageUrl : null;
+      let discordUsername = discordIdentity ? discordIdentity.username : null;
+      let discordImageUrl = discordIdentity ? discordIdentity.imageUrl : null;
+
+      // Grab what's already in state, otherwise load.
+      const username = state.username || currentUser.username;
+      const avatarPlatform = state.avatarPlatform || currentUser.avatarPlatform;
+      twitterUsername = state.twitterUsername || twitterUsername;
+      twitterImageUrl = state.twitterImageUrl || twitterImageUrl;
+      discordUsername = state.discordUsername || discordUsername;
+      discordImageUrl = state.discordImageUrl || discordImageUrl;
+      const signalPublished = state.signalPublished || playSignal.published;
+      const signalEndTime = state.signalEndTime || playSignal.endTime;
+      const signalLat = state.signalLat || playSignal.lat;
+      const signalLng = state.signalLng || playSignal.lng;
+      const signalMessage = state.signalMessage || playSignal.message;
 
       return {
         username,
         avatarPlatform,
-        twitterUsername: twitterIdentity ? twitterIdentity.username : null,
-        twitterImageUrl: twitterIdentity ? twitterIdentity.imageUrl : null,
-        discordUsername: discordIdentity ? discordIdentity.username : null,
-        discordImageUrl: discordIdentity ? discordIdentity.imageUrl : null,
-        signalPublished: playSignal.published,
-        signalEndTime: playSignal.endTime,
-        signalLat: playSignal.lat,
-        signalLng: playSignal.lng,
-        signalMessage: playSignal.message,
+        twitterUsername,
+        twitterImageUrl,
+        discordUsername,
+        discordImageUrl,
+        signalPublished,
+        signalEndTime,
+        signalLat,
+        signalLng,
+        signalMessage,
       };
     case 'UPDATE_CURRENT_USER_SIGNAL':
       const { published, message, endTime, lat, lng } = action;

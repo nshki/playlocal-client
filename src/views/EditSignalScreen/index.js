@@ -128,8 +128,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateSignal: (message, endTime, lat, lng) => {
-      dispatch(updateSignal(message, endTime, lat, lng));
+    updateSignal: (published, message, endTime, lat, lng) => {
+      dispatch(updateSignal(published, message, endTime, lat, lng));
     },
   };
 };
