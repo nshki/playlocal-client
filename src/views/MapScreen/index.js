@@ -4,7 +4,13 @@ import Map from '../../components/Map';
 
 class MapScreen extends React.Component {
   render() {
-    const { location, currentUser, signals, geolocation } = this.props;
+    const {
+      location,
+      currentUser,
+      signals,
+      geolocation,
+      preferences,
+    } = this.props;
     const short = location.pathname.indexOf('/signal') > -1;
 
     // Set a center coordinate.
@@ -12,6 +18,7 @@ class MapScreen extends React.Component {
     let lng = null;
     let interpolate = false;
     if (location.pathname.indexOf('/signal/') === 0) {
+      // Center on user signal.
       const username = decodeURI(window.location.href.split('/signal/')[1]);
       const signal = signals.find((s) => s.username === username);
       if (signal) {
@@ -20,6 +27,7 @@ class MapScreen extends React.Component {
         interpolate = true;
       }
     } else if (location.pathname.indexOf('/signal') === 0) {
+      // Center on selected signal.
       if (
         currentUser.signalPublished &&
         currentUser.signalLat &&
@@ -35,11 +43,16 @@ class MapScreen extends React.Component {
       }
     }
 
+    // Only show signals in search radius.
+    const matchingSignals = signals.filter((signal) => {
+      return signal.distance < preferences.searchRadius;
+    });
+
     return (
       <Map
         short={short}
         currentUser={currentUser}
-        signals={signals}
+        signals={matchingSignals}
         geolocation={geolocation}
         lat={lat}
         lng={lng}
@@ -54,6 +67,7 @@ const mapStateToProps = (state) => {
     currentUser: state.currentUser,
     signals: state.signals,
     geolocation: state.geolocation,
+    preferences: state.preferences,
   };
 };
 

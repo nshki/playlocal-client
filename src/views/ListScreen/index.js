@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import {
   timeFromNow,
-  distanceBetween,
   twitterButton,
   discordButton,
 } from '../../helpers/signals';
@@ -24,25 +23,15 @@ import {
 
 class ListScreen extends React.Component {
   renderCards = () => {
-    const { signals, geolocation, preferences } = this.props;
+    const { signals, preferences } = this.props;
 
-    // Calculate distance from each signal.
-    let sortedSignals = signals.map((signal) => {
-      return { ...signal, distance: distanceBetween(signal, geolocation) };
+    // Only show signals in search radius.
+    const matchingSignals = signals.filter((signal) => {
+      return signal.distance < preferences.searchRadius;
     });
 
-    // Sort signals by distance.
-    sortedSignals.sort((a, b) => {
-      return a.distance - b.distance;
-    });
-
-    // Filter out distances that don't fit within search radius.
-    sortedSignals = sortedSignals.filter((signal) => {
-      return signal.distance <= preferences.searchRadius;
-    });
-
-    if (sortedSignals.length > 0) {
-      return sortedSignals.map((signal, i) => (
+    if (matchingSignals.length > 0) {
+      return matchingSignals.map((signal, i) => (
         <Card key={`card-${i}`}>
           <CardHeader>
             <CardAvatar imageUrl={signal.imageUrl} />
@@ -68,18 +57,18 @@ class ListScreen extends React.Component {
           </CardBody>
         </Card>
       ));
+    } else {
+      return (
+        <Card>
+          <CardBody>
+            <CardBodyMessage>
+              No one is available within this search radius. :'( Try expanding
+              your search?
+            </CardBodyMessage>
+          </CardBody>
+        </Card>
+      );
     }
-
-    return (
-      <Card>
-        <CardBody>
-          <CardBodyMessage>
-            No one is available within this search radius. :'( Try expanding
-            your search?
-          </CardBodyMessage>
-        </CardBody>
-      </Card>
-    );
   };
 
   render() {
@@ -96,9 +85,8 @@ class ListScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser,
     signals: state.signals,
-    geolocation: state.geolocation,
+    currentUser: state.currentUser,
     preferences: state.preferences,
   };
 };
