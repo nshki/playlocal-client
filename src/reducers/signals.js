@@ -6,7 +6,7 @@ const initialState = [];
 export default function signals(state = initialState, action) {
   switch (action.type) {
     case 'UPDATE_APP_DATA':
-      const { geolocation } = action;
+      const { geolocation, username } = action;
 
       if (!action.data.activeSignals || !geolocation) {
         return state;
@@ -22,9 +22,10 @@ export default function signals(state = initialState, action) {
         return a.distance - b.distance;
       });
 
-      // Filter out distances that don't fit within a max search radius.
+      // Filter out distances that don't fit within a max search radius and is
+      // not the user's own signal.
       sortedSignals = sortedSignals.filter((signal) => {
-        return signal.distance <= 25;
+        return signal.distance <= 25 && signal.user.username !== username;
       });
 
       return sortedSignals.map((signal) => {

@@ -98,7 +98,13 @@ const LoadingIcon = styled.div`
 
 class LoadQuery extends React.Component {
   render() {
-    const { onLoad, children, geolocation, preferences } = this.props;
+    const {
+      onLoad,
+      children,
+      geolocation,
+      preferences,
+      currentUser,
+    } = this.props;
 
     return (
       <Query
@@ -116,7 +122,9 @@ class LoadQuery extends React.Component {
             );
           }
 
-          setTimeout(() => onLoad(data, geolocation, preferences), 0);
+          setTimeout(() => {
+            onLoad(data, geolocation, preferences, currentUser.username);
+          }, 0);
           return children;
         }}
       </Query>
@@ -126,6 +134,7 @@ class LoadQuery extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    currentUser: state.currentUser,
     geolocation: state.geolocation,
     preferences: state.preferences,
   };
@@ -133,8 +142,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLoad: (data, geolocation, preferences) => {
-      dispatch(updateAppData(data, geolocation, preferences));
+    onLoad: (data, geolocation, preferences, username) => {
+      dispatch(updateAppData(data, geolocation, preferences, username));
     },
   };
 };
