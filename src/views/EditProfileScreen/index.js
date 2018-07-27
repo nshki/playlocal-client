@@ -37,7 +37,7 @@ class EditProfileScreen extends React.Component {
     const { currentUser: { twitterUsername } } = this.props;
     const token = getFromStorage('token');
     if (!twitterUsername && token) {
-      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/twitter?token=${token}`;
+      window.location.href = `${process.env.REACT_APP_API_URL}/auth/twitter?token=${token}`;
     }
   };
 
@@ -45,7 +45,7 @@ class EditProfileScreen extends React.Component {
     const { currentUser: { discordUsername } } = this.props;
     const token = getFromStorage('token');
     if (!discordUsername && token) {
-      window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord?token=${token}`;
+      window.location.href = `${process.env.REACT_APP_API_URL}/auth/discord?token=${token}`;
     }
   };
 

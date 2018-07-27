@@ -147,7 +147,7 @@ class Map extends React.Component {
           {...this.state.viewport}
           onViewportChange={this.updateViewport}
           mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}
-          mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+          mapStyle="mapbox://styles/mapbox/dark-v9"
           transitionDuration={transitionDuration}
           transitionInterpolator={new FlyToInterpolator()}
         >

@@ -8,12 +8,12 @@ import { Container } from './style';
 class SignInOverlay extends React.Component {
   onTwitterClick = (e) => {
     e.stopPropagation();
-    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/twitter`;
+    window.location.href = `${process.env.REACT_APP_API_URL}/auth/twitter`;
   };
 
   onDiscordClick = (e) => {
     e.stopPropagation();
-    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/auth/discord`;
+    window.location.href = `${process.env.REACT_APP_API_URL}/auth/discord`;
   };
 
   render() {

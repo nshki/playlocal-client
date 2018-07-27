@@ -10,7 +10,7 @@ const authContext = () => {
   if (params.token) {
     token = params.token;
     setInStorage('token', token);
-    window.location.replace(process.env.REACT_APP_BASE_URL);
+    window.location.replace(process.env.REACT_APP_CLIENT_URL);
   }
 
   return {
