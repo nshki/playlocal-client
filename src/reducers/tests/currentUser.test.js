@@ -84,4 +84,85 @@ describe('currentUser reducer', () => {
     const result = currentUser(state, action);
     expect(result).toEqual(state);
   });
+
+  it('handles UPDATE_CURRENT_USER_SIGNAL', () => {
+    const action = {
+      type: 'UPDATE_CURRENT_USER_SIGNAL',
+      published: false,
+      message: 'new message',
+      endTime: 'new time',
+      lat: 9.87,
+      lng: 6.54,
+    };
+
+    const result = currentUser(initialState, action);
+    expect(result).toEqual({
+      username: initialState.username,
+      avatarPlatform: initialState.avatarPlatform,
+      twitterUsername: initialState.twitterUsername,
+      twitterImageUrl: initialState.twitterImageUrl,
+      discordUsername: initialState.discordUsername,
+      discordImageUrl: initialState.discordImageUrl,
+      signalPublished: false,
+      signalMessage: 'new message',
+      signalEndTime: 'new time',
+      signalLat: 9.87,
+      signalLng: 6.54,
+    });
+  });
+
+  it('handles UPDATE_CURRENT_USER', () => {
+    const action = {
+      type: 'UPDATE_CURRENT_USER',
+      username: 'new user',
+      avatarPlatform: 'new platform',
+    };
+
+    const result = currentUser(initialState, action);
+    expect(result).toEqual({
+      username: 'new user',
+      avatarPlatform: 'new platform',
+      twitterUsername: initialState.twitterUsername,
+      twitterImageUrl: initialState.twitterImageUrl,
+      discordUsername: initialState.discordUsername,
+      discordImageUrl: initialState.discordImageUrl,
+      signalPublished: initialState.signalPublished,
+      signalMessage: initialState.signalMessage,
+      signalEndTime: initialState.signalEndTime,
+      signalLat: initialState.signalLat,
+      signalLng: initialState.signalLng,
+    });
+  });
+
+  it('handles UPDATE_CURRENT_USER_IDENTITIES', () => {
+    const action = {
+      type: 'UPDATE_CURRENT_USER_IDENTITIES',
+      avatarPlatform: 'new platform',
+      twitterUsername: 'new twitter user',
+      twitterImageUrl: 'new twitter image',
+      discordUsername: 'new discord user',
+      discordImageUrl: 'new discord image',
+    };
+
+    const result = currentUser(initialState, action);
+    expect(result).toEqual({
+      username: initialState.username,
+      avatarPlatform: 'new platform',
+      twitterUsername: 'new twitter user',
+      twitterImageUrl: 'new twitter image',
+      discordUsername: 'new discord user',
+      discordImageUrl: 'new discord image',
+      signalPublished: initialState.signalPublished,
+      signalEndTime: initialState.signalEndTime,
+      signalLat: initialState.signalLat,
+      signalLng: initialState.signalLng,
+      signalMessage: initialState.signalMessage,
+    });
+  });
+
+  it('handles CLEAR_CURRENT_USER', () => {
+    const action = { type: 'CLEAR_CURRENT_USER' };
+    const result = currentUser(initialState, action);
+    expect(result).toEqual(initialState);
+  });
 });

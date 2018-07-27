@@ -4,7 +4,7 @@
  * @return {void}
  */
 export const clearStorage = () => {
-  if (!localStorage) return;
+  if (typeof localStorage === 'undefined') return;
 
   localStorage.clear();
 };
@@ -16,7 +16,7 @@ export const clearStorage = () => {
  * @returns {*}
  */
 export const getFromStorage = (key) => {
-  if (!localStorage) return;
+  if (typeof localStorage === 'undefined') return;
 
   try {
     return JSON.parse(localStorage.getItem(key));
@@ -33,7 +33,7 @@ export const getFromStorage = (key) => {
  * @returns {void}
  */
 export const setInStorage = (key, item) => {
-  if (!localStorage) return;
+  if (typeof localStorage === 'undefined') return;
 
   try {
     return localStorage.setItem(key, JSON.stringify(item));
@@ -49,7 +49,7 @@ export const setInStorage = (key, item) => {
  * @returns {void}
  */
 export const removeFromStorage = (key) => {
-  if (!localStorage) return;
+  if (typeof localStorage === 'undefined') return;
 
   try {
     return localStorage.removeItem(key);
