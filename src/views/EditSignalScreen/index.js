@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import Datetime from 'react-datetime';
+import moment from 'moment';
 import { updateSignal } from '../../actions/currentUser';
 import Title from '../../components/Title';
 import FieldContainer from '../../components/FieldContainer';
@@ -44,10 +45,9 @@ class EditSignalScreen extends React.Component {
 
     // Set default time. If the user is signed in and they have an active
     // signal, set the time to that.
-    let defaultTime = new Date();
-    defaultTime.setHours(defaultTime.getHours() + 1);
-    defaultTime.setMinutes(0);
-    if (published && endTime) defaultTime = new Date(endTime);
+    const defaultTime = (published && endTime) ?
+      moment(endTime) :
+      moment().startOf('hour').add(1, 'hour');
 
     return (
       <Container>
