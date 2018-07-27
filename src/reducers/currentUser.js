@@ -35,7 +35,9 @@ export default function currentUser(state = initialState, action) {
       twitterImageUrl = state.twitterImageUrl || twitterImageUrl;
       discordUsername = state.discordUsername || discordUsername;
       discordImageUrl = state.discordImageUrl || discordImageUrl;
-      const signalPublished = state.signalPublished || playSignal.published;
+      const signalPublished = state.signalPublished !== null ?
+        state.signalPublished :
+        playSignal.published;
       const signalEndTime = state.signalEndTime || playSignal.endTime;
       const signalLat = state.signalLat || playSignal.lat;
       const signalLng = state.signalLng || playSignal.lng;
