@@ -26,6 +26,13 @@ class EditSignalScreen extends React.Component {
         }
       });
     }
+
+    // Trigger click event on .rdtDay.rdtActive, which should be the calculated
+    // day set by defaultTime in render(). This formats the defaultValue of
+    // the Datetime component and puts it in the store, which is needed for
+    // users who want to publish without editing the time.
+    const activeDay = document.querySelector('.rdtDay.rdtActive');
+    if (activeDay) activeDay.click();
   }
 
   render() {
