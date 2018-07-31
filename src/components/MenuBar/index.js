@@ -21,7 +21,7 @@ class MenuBar extends React.Component {
 
     return (
       <Container>
-        <Logo>Kacha</Logo>
+        <Logo>Play Local</Logo>
         {action}
       </Container>
     );
