@@ -7,6 +7,10 @@ import Button from '../../components/Button';
 import { Container } from './style';
 
 class MenuOverlay extends React.Component {
+  onContributeClick = () => {
+    window.open('https://github.com/nshki/playlocal-client', '_blank');
+  };
+
   render() {
     const { currentUser, visible, onOverlayClick, onSignOutClick } = this.props;
 
@@ -19,6 +23,7 @@ class MenuOverlay extends React.Component {
         <Container>
           <Button to="/profile">Edit Profile</Button>
           <Button onClick={onSignOutClick}>Sign out</Button>
+          <Button onClick={this.onContributeClick}>Contribute</Button>
         </Container>
       </Overlay>
     );
