@@ -72,11 +72,10 @@ Any API-related issues are tracked in the [API repo](https://github.com/nshki/pl
         $ yarn start
 
 
-# Discord Server
-
-Want to chat with contributors directly? [Join the Discord server](https://discord.gg/bk8s4VT)!
-
-
 # Contributing
 
 If you would like to contribute to Play Local, check out the [contribution guidelines here](https://github.com/nshki/playlocal-client/blob/master/CONTRIBUTING.md)!
+
+## Discord Server
+
+Want to chat with contributors directly? [Join the Discord server](https://discord.gg/bk8s4VT)!
