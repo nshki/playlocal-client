@@ -53,23 +53,23 @@ Any API-related issues are tracked in the [API repo](https://github.com/nshki/pl
 
 1. Clone this repository and open the root directory:
 
-    $ git clone git@github.com:nshki/playlocal-client.git
-    $ cd playlocal-client
+        $ git clone git@github.com:nshki/playlocal-client.git
+        $ cd playlocal-client
 
 2. Create a new file called `.env.local` with the following content:
 
-    REACT_APP_CLIENT_URL=http://localhost:3000
-    REACT_APP_API_URL=http://localhost:3001
-    REACT_APP_MAPBOX_ACCESS_TOKEN=<YOUR TOKEN HERE>
+        REACT_APP_CLIENT_URL=http://localhost:3000
+        REACT_APP_API_URL=http://localhost:3001
+        REACT_APP_MAPBOX_ACCESS_TOKEN=<YOUR TOKEN HERE>
 
 2. At the command prompt, install all dependencies:
 
-    $ yarn install
+        $ yarn install
 
 3. Run tests and start the development server:
 
-    $ yarn test
-    $ yarn start
+        $ yarn test
+        $ yarn start
 
 
 # Discord Server
@@ -79,4 +79,4 @@ Want to chat with contributors directly? [Join the Discord server](https://disco
 
 # Contributing
 
-If you would like to contribute to Play Local, check out the contribution guidelines here!
+If you would like to contribute to Play Local, check out the [contribution guidelines here](https://github.com/nshki/playlocal-client/blob/master/CONTRIBUTING.md)!
