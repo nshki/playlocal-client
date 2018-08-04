@@ -22,9 +22,15 @@ importantly, _why_ you think the feature would be a positive addition.
 ## Code Contributions
 
 Please feel free to submit new PRs to existing issues. If you'd like to work on
-something that isn't tracked by issues, please create a new issue first. All
-code contributions should ensure the test suite passes locally when running
-`yarn test` and that all linter errors/warnings shown by `yarn start` are gone.
+something that isn't tracked by issues, please create a new issue first.
+
+All code contributions for the client app should ensure the test suite passes
+locally when running `yarn test` and that all linter errors/warnings shown by
+`yarn start` are gone.
+
+For the API app, ensure all tests pass when running `bin/rails test`.
+
+If possible, please try to write tests for any feature that you work on as well!
 
 
 ## Design Contributions
