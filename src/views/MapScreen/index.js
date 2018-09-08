@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Brochure from '../../components/Brochure';
 import Map from '../../components/Map';
 
 class MapScreen extends React.Component {
@@ -49,15 +50,18 @@ class MapScreen extends React.Component {
     });
 
     return (
-      <Map
-        short={short}
-        currentUser={currentUser}
-        signals={matchingSignals}
-        geolocation={geolocation}
-        lat={lat}
-        lng={lng}
-        interpolate={interpolate}
-      />
+      <React.Fragment>
+        {!currentUser.username && <Brochure />}
+        <Map
+          short={short}
+          currentUser={currentUser}
+          signals={matchingSignals}
+          geolocation={geolocation}
+          lat={lat}
+          lng={lng}
+          interpolate={interpolate}
+        />
+      </React.Fragment>
     );
   }
 }
