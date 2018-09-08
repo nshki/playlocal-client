@@ -22,6 +22,12 @@ const Brochure = ({ onButtonClick }) => (
     <Text>
       <Button onClick={onButtonClick}>Get Started</Button>
     </Text>
+    <Text>
+      <small>
+        Play Local is free and open-source software. Interested in contributing?
+        See the <a href="https://github.com/nshki/playlocal-client" target="_blank" rel="noopener noreferrer">GitHub repository</a>.
+      </small>
+    </Text>
   </Container>
 );
 

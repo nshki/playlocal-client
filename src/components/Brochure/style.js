@@ -33,4 +33,20 @@ export const Text = styled.p`
   margin: 1rem 0;
   line-height: 1.4;
   color: #fff;
+
+  small {
+    display: block;
+    margin-top: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  a {
+    text-decoration: underline;
+    color: inherit;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: #fff;
+    }
+  }
 `;
