@@ -4,8 +4,8 @@ import { Container, LoadingIcon, Fader } from './style';
 
 class LoadGate extends React.Component {
   render() {
-    const { app, geolocation, children } = this.props;
-    if (app.loaded && geolocation.lat && geolocation.lng) {
+    const { app, children } = this.props;
+    if (app.loaded) {
       return (
         <Fader>
           {children}
@@ -24,7 +24,6 @@ class LoadGate extends React.Component {
 const mapStateToProps = (state) => {
   return {
     app: state.app,
-    geolocation: state.geolocation,
   };
 };
 
