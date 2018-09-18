@@ -53,7 +53,7 @@ class ControlBar extends React.Component {
         <CaretIcon />
 
         <DropdownItems open={dropdownOpen}>
-          {[25, 10, 5].map((radiusOption, i) =>
+          {[50, 25, 10, 5].map((radiusOption, i) =>
             <DropdownItem
               key={`dropdown-item-${i}`}
               onClick={() => this.onDropdownItemClick(radiusOption)}
