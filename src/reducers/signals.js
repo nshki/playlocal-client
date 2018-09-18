@@ -25,7 +25,7 @@ export default function signals(state = initialState, action) {
       // Filter out distances that don't fit within a max search radius and is
       // not the user's own signal.
       sortedSignals = sortedSignals.filter((signal) => {
-        return signal.distance <= 25 && signal.user.username !== username;
+        return signal.distance <= 50 && signal.user.username !== username;
       });
 
       return sortedSignals.map((signal) => {
