@@ -99,8 +99,8 @@ describe('signals reducer', () => {
             },
           },
           {
-            lat: 39.5164961,
-            lng: -76.2359197,
+            lat: 38.1958492,
+            lng: -77.7481367,
             endTime: 'too far time',
             message: 'too far message',
             user: {
